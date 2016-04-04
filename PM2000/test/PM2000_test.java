@@ -1,11 +1,14 @@
-import org.junit.Assert;
+/**
+ * Created by madsbjoern on 04/04/16.
+ */
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class PM2000_test {
     @Test
-    public void TestDelay_Microseconds_ReturnsInMicroseconds() {
+    public void TestConstant_Constructor_SetsValue() {
         PM2000 pm2000 = new PM2000();
+
+        assertNull(pm2000);
     }
 }
