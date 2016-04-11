@@ -10,5 +10,6 @@ public class PM2000Test {
         PM2000 pm2000 = new PM2000();
 
         assertNull(pm2000);
+
     }
 }
