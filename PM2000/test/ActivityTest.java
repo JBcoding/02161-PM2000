@@ -6,8 +6,6 @@ import org.junit.Test;
 
 import org.junit.Test;
 
-import javax.jws.soap.SOAPBinding;
-
 import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import static org.junit.Assert.*;
@@ -50,11 +48,35 @@ public class ActivityTest {
     }
 
     @Test
+    public void TestActivity_Constructor_NoNullName() {
+        Project project = new Project("Project name", "Project ID");
+
+        try {
+            Activity activity = new Activity(null, project);
+
+            fail("Activity allows null name");
+        } catch (NullPointerException e) {
+
+        }
+    }
+
+    @Test
+    public void TestActivity_Constructor_NoNullProject() {
+        try {
+            Activity activity = new Activity("Activity name", null);
+
+            fail("Activity allows null project");
+        } catch (NullPointerException e) {
+
+        }
+    }
+
+    @Test
     public void TestActivity_AddMember_AddsMember() {
         Project project = new Project("Project name", "Project ID");
         Activity activity = new Activity("Activity name", project);
 
-        User user = new User();
+        User user = new User("", "", "");
         activity.addMember(user);
 
         assertTrue(activity.getMembers().contains(user));
@@ -65,7 +87,7 @@ public class ActivityTest {
         Project project = new Project("Project name", "Project ID");
         Activity activity = new Activity("Activity name", project);
 
-        User user = new User();
+        User user = new User("", "", "");
         activity.addMember(user);
         activity.addMember(user);
 
@@ -123,12 +145,12 @@ public class ActivityTest {
     }
 
     @Test
-    public void TestActivity_GetUsedTimeOnActivity_GetsUsedTime() {
+    public void TestActivity_GetUsedTimeOnActivity_GetsUsedTime() throws NegativeTimeException {
         Project project = new Project("Project name", "Project ID");
         Activity activity = new Activity("Activity name", project);
 
-        User user1 = new User();
-        User user2 = new User();
+        User user1 = new User("", "", "");
+        User user2 = new User("", "", "");
 
         activity.addMember(user1);
         activity.addMember(user2);
