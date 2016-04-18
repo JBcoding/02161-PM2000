@@ -21,6 +21,7 @@ public class Activity {
     }
 
     public boolean addMember(User user) {
+        return false;
     }
 
     public Set<User> getMembers() {
