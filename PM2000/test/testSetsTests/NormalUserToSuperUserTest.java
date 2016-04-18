@@ -6,32 +6,30 @@ import static org.junit.Assert.*;
  * Created by madsbjoern on 04/04/16.
  */
 
-public class SuperUserToNormalUserTest {
+public class NormalUserToSuperUserTest {
 
     @Test
     public void TestInputA() {
         User user = null;
         try {
-            user.makeNormalUser();
-            fail("Can make null user to normal user");
+            user.makeSuperUser();
+            fail("Can make null user to super user");
         } catch (NullPointerException e) {}
     }
 
     @Test
     public void TestInputB() {
         User user = new User("name", "mail", "12345678");
-        user.makeSuperUser();
-        assertTrue(user.makeNormalUser());
-        assertFalse(user.isSuperUser());
+        assertTrue(user.makeSuperUser());
+        assertTrue(user.isSuperUser());
     }
 
     @Test
     public void TestInputC() {
         User user = new User("name", "mail", "12345678");
         user.makeSuperUser();
-        user.makeNormalUser();
-        assertFalse(user.makeNormalUser());
-        assertFalse(user.isSuperUser());
+        assertFalse(user.makeSuperUser());
+        assertTrue(user.isSuperUser());
     }
 
     // Test D, can not be recreated in code

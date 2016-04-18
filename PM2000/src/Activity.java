@@ -20,7 +20,7 @@ public class Activity {
         return -1;
     }
 
-    public void addMember(User user) {
+    public boolean addMember(User user) {
     }
 
     public Set<User> getMembers() {
