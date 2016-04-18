@@ -45,7 +45,15 @@ public class User {
         return false;
     }
 
+    public boolean makeSuperUser() {return false;}
+
+    public boolean makeNormalUser() {return false;}
+
     public boolean isSuperUser() {
         return false;
+    }
+
+    public String getID() {
+        return null;
     }
 }

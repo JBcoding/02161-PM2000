@@ -27,17 +27,13 @@ public class Activity {
         return null;
     }
 
-    public boolean setStartDate(Date startDate) {
-        return false;
-    }
+    public void setStartDate(Date startDate) throws NegativeTimeException {}
 
     public Date getStartDate() {
         return null;
     }
 
-    public boolean setEndDate(Date endDate) {
-        return false;
-    }
+    public void setEndDate(Date endDate) throws NegativeTimeException {}
 
     public Date getEndDate() {
         return null;
