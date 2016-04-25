@@ -28,7 +28,7 @@ public class DayTest {
         day.addUsedTime(activity1, new Date(0, 0, 0, 10, 15, 0), new Date(0, 0, 0, 15, 45, 0));
         day.addUsedTime(activity2, new Date(0, 0, 0, 13, 15, 0), new Date(0, 0, 0, 17, 0, 0));
 
-        assertEquals(day.getUsedTimeOnActivity(activity2), 15); // 15 quaters
+        assertEquals(day.getUsedTimeOnActivity(activity1), 12); // 12 quaters
     }
 
     @Test

@@ -79,7 +79,7 @@ public class UserTest {
         Activity activity = new Activity("", project);
 
         user.addActivity(activity);
-        assertTrue(user.getActivitys().contains(activity));
+        assertTrue(user.getActivities().contains(activity));
     }
 
     @Test

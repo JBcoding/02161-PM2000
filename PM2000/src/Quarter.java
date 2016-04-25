@@ -2,7 +2,13 @@
  * Created by madsbjoern on 04/04/16.
  */
 public class Quarter {
-    public void setActivity(Activity activity) {}
+    protected Activity activity;
 
-    public Activity getActivity() {return null;}
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
 }

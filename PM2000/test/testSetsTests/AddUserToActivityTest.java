@@ -58,7 +58,7 @@ public class AddUserToActivityTest {
         }
         Activity activity = new Activity("name11", new Project("name11"));
         assertFalse(activity.addMember(user));
-        assertEquals(user.getActivitys().size(), 10);
+        assertEquals(user.getActivities().size(), 10);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class AddUserToActivityTest {
         }
         Activity activity = new Activity("name21", new Project("name21"));
         assertFalse(activity.addMember(user));
-        assertEquals(user.getActivitys().size(), 20);
+        assertEquals(user.getActivities().size(), 20);
     }
 
     // Test G, can not be recreated in code
