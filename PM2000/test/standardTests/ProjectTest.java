@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by madsbjoern on 04/04/16.
  */
-public class ProjectTest {
+public class ProjectTest extends BeforeAndAfterTest {
     @Test
     public void TestProject_Constructor_SetsName() {
         Project project = new Project("Project name");
@@ -19,7 +19,7 @@ public class ProjectTest {
     @Test
     public void TestProject_Constructor_SetsID() {
         Project project = new Project("Project name");
-        assertEquals(project.getProjectID(), "201601");
+        assertEquals(project.getProjectID(), Integer.toString(Integer.parseInt(PM2000.getNextProjectID()) - 1));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class ProjectTest {
         Activity activity = new Activity("", project);
         project.addActivity(activity);
 
-        assertTrue(project.getActivitys().contains(activity));
+        assertTrue(project.getActivities().contains(activity));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class ProjectTest {
         project.addActivity(activity);
         project.addActivity(activity);
 
-        assertEquals(project.getActivitys().size(), 1);
+        assertEquals(project.getActivities().size(), 1);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class ProjectTest {
     @Test
     public void TestActivity_GetUsedTimeOnActivity_GetsUsedTime() throws NegativeTimeException {
         Project project = new Project("Project name");
-        Activity activity1 = new Activity("Activity name", project);
+        Activity activity1 = new Activity("Activity name1", project);
 
         User user1 = new User("name1", "mail1", "123456781");
         User user2 = new User("name2", "mail2", "123456782");
@@ -146,7 +146,7 @@ public class ProjectTest {
         user2.addUsedTime(activity1, new Date(2016, 4, 1), new Date(2016, 4, 20), new Date(0, 0, 0, 9, 0, 0), new Date(0, 0, 0, 16, 15, 0));
 
 
-        Activity activity2 = new Activity("Activity name", project);
+        Activity activity2 = new Activity("Activity name2", project);
 
         User user3 = new User("name3", "mail3", "123456783");
         User user4 = new User("name4", "mail4", "123456784");

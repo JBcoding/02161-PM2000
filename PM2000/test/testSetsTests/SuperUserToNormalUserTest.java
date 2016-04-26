@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
  * Created by madsbjoern on 04/04/16.
  */
 
-public class SuperUserToNormalUserTest {
+public class SuperUserToNormalUserTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputA() {

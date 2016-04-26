@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 /**
  * Created by madsbjoern on 04/04/16.
  */
-public class UserTest {
+public class UserTest extends BeforeAndAfterTest {
     @Test
     public void TestUser_Constructor_SetsName() {
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
@@ -152,7 +152,7 @@ public class UserTest {
         user.toggleSuperUserStatus();
 
         for (int i = 0; i < 15; i ++) {
-            user.addActivity(new Activity("", new Project("name")));
+            user.addActivity(new Activity("", new Project("name" + i)));
         }
 
         assertFalse(user.toggleSuperUserStatus());

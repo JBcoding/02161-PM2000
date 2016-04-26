@@ -16,17 +16,33 @@ public class User {
     protected SimpleCalendar simpleCalendar;
 
     public User(String name, String mail, String tel) throws NullPointerException {
-        if (name == null || mail == null || tel == null || name.equals("") || mail.equals("") || tel.equals("")) {
-            throw new NullPointerException();
+        if (name == null || name.equals("")) {
+            throw new  NullPointerException("No name given");
+        }
+        if (tel == null || tel.equals("")) {
+            throw new NullPointerException("No phone number given");
+        }
+        if (mail == null || mail.equals("")) {
+            throw new NullPointerException("No mail given");
         }
         this.name = name;
         this.mail = mail;
         this.tel = tel;
         simpleCalendar = new SimpleCalendar();
         activities = new HashSet<>();
+        userID = PM2000.generateUserIDFromName(name);
+        PM2000.addUser(this);
     }
 
-    public void addUsedTime(Activity activity, Date startDate, Date endDate, Date startTime, Date endTime) throws NegativeTimeException {
+    public void addUsedTime(Activity activity, Date startDate, Date endDate, Date startTime, Date endTime) throws NegativeTimeException, IllegalArgumentException {
+        if (activity == null || startDate == null || endDate == null || startTime == null || endTime == null) {
+            throw new IllegalArgumentException();
+        }
+        if (activity.getStartDate() != null && activity.getStartDate().after(startDate)) {
+            throw new NegativeTimeException("Aktivitet Ikke Begyndt ved Start Dato");
+        } else if (activity.getEndDate() != null && activity.getEndDate().before(endDate)) {
+            throw new NegativeTimeException("Aktivitet Afsluttet Før Slut Dato");
+        }
         if (!startDate.before(endDate)) {
             throw new NegativeTimeException("You cannot add negative dates");
         } else if (!startTime.before(endTime)) {
@@ -55,8 +71,15 @@ public class User {
         return project;
     }
 
-    public void addActivity(Activity activity) {
+    public boolean addActivity(Activity activity) {
+        if (activities.size() == (superUser ? 20 : 10)) {
+            return false;
+        }
         activities.add(activity);
+        if (!activity.getMembers().contains(this)) {
+            activity.addMember(this);
+        }
+        return true;
     }
 
     public Set<Activity> getActivities() {

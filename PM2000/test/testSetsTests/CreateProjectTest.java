@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import static org.junit.Assert.*;
 
-public class CreateProjectTest {
+public class CreateProjectTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputA() {

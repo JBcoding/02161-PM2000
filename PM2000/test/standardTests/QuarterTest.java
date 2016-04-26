@@ -8,7 +8,7 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class QuarterTest {
+public class QuarterTest extends BeforeAndAfterTest {
     @Test
     public void TestQuarter_SetActivity_SetsValue() {
         Activity activity = new Activity("", new Project("name"));

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Fr on 18-04-2016.
  */
-public class CreateActivityTest {
+public class CreateActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputA() {

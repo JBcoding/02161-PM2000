@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 /**
  * Created by madsbjoern on 18/04/16.
  */
-public class PlanningTest {
+public class PlanningTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputA() {
@@ -93,23 +93,31 @@ public class PlanningTest {
     }
 
     @Test
-    public void TestInputD2() {
+    public void TestInputD2() throws NegativeTimeException {
         User user = new User("name", "mail", "12345678");
         Activity activity = new Activity("name", new Project("name"));
+        activity.setEndDate(new Date(2016, 1, 1));
+        activity.setStartDate(new Date(2015, 1, 1));
         try {
             user.addUsedTime(activity, new Date(2015, 4, 23), new Date(2016, 5, 14), new Date(0, 0, 0, 8, 0, 0), new Date(0, 0, 0, 16, 0, 0));
             fail("negative time");
-        } catch (NegativeTimeException e) {} catch (IllegalArgumentException e) {}
+        } catch (NegativeTimeException e) {
+            assertEquals(e.getMessage(), "Aktivitet Afsluttet Før Slut Dato");
+        } catch (IllegalArgumentException e) {}
     }
 
     @Test
-    public void TestInputD3() {
+    public void TestInputD3() throws NegativeTimeException {
         User user = new User("name", "mail", "12345678");
         Activity activity = new Activity("name", new Project("name"));
+        activity.setEndDate(new Date(2017, 1, 1));
+        activity.setStartDate(new Date(2016, 1, 1));
         try {
             user.addUsedTime(activity, new Date(2015, 4, 23), new Date(2016, 5, 14), new Date(0, 0, 0, 8, 0, 0), new Date(0, 0, 0, 16, 0, 0));
             fail("negative time");
-        } catch (NegativeTimeException e) {} catch (IllegalArgumentException e) {}
+        } catch (NegativeTimeException e) {
+            assertEquals(e.getMessage(), "Aktivitet Ikke Begyndt ved Start Dato");
+        } catch (IllegalArgumentException e) {}
     }
 
     @Test
@@ -117,7 +125,7 @@ public class PlanningTest {
         User user = new User("name", "mail", "12345678");
         Activity activity = new Activity("name", new Project("name"));
         try {
-            user.addUsedTime(activity, new Date(2015, 4, 23), new Date(2016, 5, 14), new Date(0, 0, 0, 8, 0, 0), new Date(0, 0, 0, 16, 0, 0));
+            user.addUsedTime(activity, new Date(2016, 4, 23), new Date(2015, 5, 14), new Date(0, 0, 0, 8, 0, 0), new Date(0, 0, 0, 16, 0, 0));
             fail("negative time");
         } catch (NegativeTimeException e) {} catch (IllegalArgumentException e) {}
     }

@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 /**
  * Created by madsbjoern on 18/04/16.
  */
-public class AddDateToActivityTest {
+public class AddDateToActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputA() {

@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import static org.junit.Assert.*;
 
-public class SimpleCalendarTest {
+public class SimpleCalendarTest extends BeforeAndAfterTest {
     @Test
     public void TestSimpleCalendar_AddUsedTime_AddsUsedTime() throws NegativeTimeException {
         Activity activity = new Activity("", new Project("name"));

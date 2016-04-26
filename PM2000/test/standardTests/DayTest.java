@@ -6,7 +6,7 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class DayTest {
+public class DayTest extends BeforeAndAfterTest {
     @Test
     public void TestDay_AddUsedTime_AddsUsedTime() throws NegativeTimeException {
         Activity activity = new Activity("", new Project("name"));

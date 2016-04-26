@@ -14,15 +14,19 @@ public class Activity {
     protected Date startDate;
     protected Date endDate;
 
-    public Activity(String name, Project project) throws NullPointerException {
+    public Activity(String name, Project project) throws NullPointerException, IllegalArgumentException {
         if (name == null || project == null) {
             throw new NullPointerException();
+        }
+        if (project.getActivityWithName(name) != null) {
+            throw new IllegalArgumentException();
         }
         IDCount ++;
         ActivityID = IDCount;
         this.name = name;
         this.project = project;
         this.members = new HashSet<>();
+        project.addActivity(this);
     }
 
     public String getName() {
@@ -37,15 +41,25 @@ public class Activity {
         return ActivityID;
     }
 
-    public boolean addMember(User user) {
-        return members.add(user);
+    public boolean addMember(User user) throws NullPointerException {
+        if (user == null) {
+            throw new NullPointerException();
+        }
+        if (!user.getActivities().contains(this) && user.addActivity(this)) {
+            members.add(user);
+            return true;
+        }
+        return false;
     }
 
     public Set<User> getMembers() {
         return members;
     }
 
-    public void setStartDate(Date startDate) throws NegativeTimeException {
+    public void setStartDate(Date startDate) throws NegativeTimeException, NullPointerException {
+        if (startDate == null) {
+            throw new NullPointerException();
+        }
         if (endDate == null) {
             this.startDate = startDate;
             return;
@@ -61,7 +75,10 @@ public class Activity {
         return startDate;
     }
 
-    public void setEndDate(Date endDate) throws NegativeTimeException {
+    public void setEndDate(Date endDate) throws NegativeTimeException, NullPointerException {
+        if (endDate == null) {
+            throw new NullPointerException();
+        }
         if (startDate == null) {
             this.endDate = endDate;
             return;

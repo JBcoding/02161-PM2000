@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import static org.junit.Assert.*;
 
-public class ActivityTest {
+public class ActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestActivity_Constructor_SetsName() {
@@ -42,7 +42,7 @@ public class ActivityTest {
         int current = (new Activity("name", new Project("name"))).getActivityID();
         Project project = new Project("Project name");
         for (int i = 0; i < 20; i ++) {
-            Activity temp = new Activity("Activity name", project);
+            Activity temp = new Activity("Activity name" + i, project);
         }
 
         Activity activity = new Activity("Activity name", project);
