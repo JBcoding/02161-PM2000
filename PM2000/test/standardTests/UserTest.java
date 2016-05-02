@@ -158,4 +158,12 @@ public class UserTest extends BeforeAndAfterTest {
         assertFalse(user.toggleSuperUserStatus());
         assertTrue(user.isSuperUser());
     }
+
+    @Test
+    public void TestUserID_Constructor_SetsUserID() {
+        new User("Mark Tosse Hansen", "Eksempel@mail", "43345312");
+        new User("Mark Tosse Holstrup", "Eksempel@mail", "43345312");
+        User user2 = new User("Mikkel Tåstrup Holger, ", "Eksempel@mail", "43345312");
+        assertEquals(user2.getID(), "MTHB");
+    }
 }

@@ -80,6 +80,30 @@ public class ProjectTest extends BeforeAndAfterTest {
     }
 
     @Test
+    public void TestProject_SetStartDate_StartDateBeforeEndDate() {
+        Project project = new Project("Project name");
+
+        Date startDate = new Date(2016, 4, 1, 0, 0, 0);
+        Date endDate = new Date(2016, 4, 2, 0, 0, 0);
+
+        project.setEndDate(endDate);
+        assertTrue(project.setStartDate(startDate));
+        assertEquals(project.getStartDate(), startDate);
+    }
+
+    @Test
+    public void TestProject_SetEndDate_EndDateAfterStartDate() {
+        Project project = new Project("Project name");
+
+        Date startDate = new Date(2016, 4, 1, 0, 0, 0);
+        Date endDate = new Date(2016, 4, 2, 0, 0, 0);
+
+        project.setStartDate(startDate);
+        assertTrue(project.setEndDate(endDate));
+        assertEquals(project.getEndDate(), endDate);
+    }
+
+    @Test
     public void TestProject_AddMember_AddsMember() {
         Project project = new Project("Project name");
 
