@@ -121,4 +121,9 @@ public class User {
     public String getID() {
         return userID;
     }
+
+    @Override
+    public String toString() {
+        return name + " (" + userID + ")";
+    }
 }
