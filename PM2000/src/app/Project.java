@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -5,7 +6,7 @@ import java.util.Set;
 /**
  * Created by madsbjoern on 04/04/16.
  */
-public class Project {
+public class Project implements Serializable {
     protected String name;
     protected String projectID;
     protected Date startDate;

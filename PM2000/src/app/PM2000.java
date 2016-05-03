@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ public final class PM2000 {
 
     public static void addUser(User user) {
         users.add(user);
+        save();
     }
 
     public static Set<User> getUsers() {
@@ -20,6 +22,7 @@ public final class PM2000 {
 
     public static void addProject(Project project) {
         projects.add(project);
+        save();
     }
 
     public static Set<Project> getProjects() {
@@ -77,5 +80,74 @@ public final class PM2000 {
         users.clear();
         projects.clear();
         projectCount = 0;
+        save();
+    }
+
+    public static String getFolderPath() {
+        String workingDirectory;
+        //here, we assign the name of the OS, according to Java, to a variable...
+        String OS = (System.getProperty("os.name")).toUpperCase();
+        //to determine what the workingDirectory is.
+        //if it is some version of Windows
+        if (OS.contains("WIN")) {
+            //it is simply the location of the "AppData" folder
+            workingDirectory = System.getenv("AppData");
+        }
+        //Otherwise, we assume Linux or Mac
+        else {
+            //in either case, we would start in the user's home directory
+            workingDirectory = System.getProperty("user.home");
+            //if we are on a Mac, we are not done, we look for "Application Support"
+            workingDirectory += "/Library/Application Support";
+        }
+        //we are now free to set the workingDirectory to the subdirectory that is our
+        //folder.
+        return workingDirectory;
+    }
+
+    public static void save() {
+        String workingDirectory = getFolderPath();
+        (new File(workingDirectory + "/PM2000")).mkdir();
+        File fileProjects = new File(workingDirectory + "/PM2000/project.txt");
+        File fileUsers = new File(workingDirectory + "/PM2000/users.txt");
+        try {
+            FileOutputStream fileOut = new FileOutputStream(fileProjects.getAbsoluteFile());
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(PM2000.getProjects());
+            out.close();
+            fileOut.close();
+
+            fileOut = new FileOutputStream(fileUsers.getAbsoluteFile());
+            out = new ObjectOutputStream(fileOut);
+            out.writeObject(PM2000.getUsers());
+            out.close();
+            fileOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void load() {
+        String workingDirectory = getFolderPath();
+        File fileProjects = new File(workingDirectory + "/PM2000/project.txt");
+        File fileUsers = new File(workingDirectory + "/PM2000/users.txt");
+        if (fileProjects.exists()) {
+            try {
+                FileInputStream fileIn = new FileInputStream(fileProjects.getAbsoluteFile());
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                projects = (Set<Project>)in.readObject();
+                projectCount = projects.size();
+                in.close();
+                fileIn.close();
+
+                fileIn = new FileInputStream(fileUsers.getAbsoluteFile());
+                in = new ObjectInputStream(fileIn);
+                users = (Set<User>)in.readObject();
+                in.close();
+                fileIn.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

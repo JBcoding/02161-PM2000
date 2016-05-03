@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by madsbjoern on 04/04/16.
  */
-public class Day {
+public class Day implements Serializable {
     protected Quarter[] quarters = new Quarter[96];
 
     public Day() {

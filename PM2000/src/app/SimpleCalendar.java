@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by madsbjoern on 04/04/16.
  */
-public class SimpleCalendar {
+public class SimpleCalendar implements Serializable {
     protected HashMap<Integer, Day> days;
 
     public SimpleCalendar() {

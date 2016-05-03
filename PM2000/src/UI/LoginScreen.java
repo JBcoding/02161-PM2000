@@ -112,6 +112,7 @@ public class LoginScreen extends Application {
     }
 
     public static void main(String[] args) {
+        PM2000.load();
         Application.launch(args);
     }
 }
