@@ -11,8 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.stream.Collectors;
-
 /**
  * Created by madsbjoern on 02/05/16.
  */
@@ -70,6 +68,8 @@ public class ManageProjects extends Stage {
         setProjectStartDateButton = new Button("Set start date");
         setProjectEndDateButton = new Button("Set end date");
         deleteProjectButton = new Button("Delete project");
+        deleteProjectButton.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {deleteProject();}});
+        deleteProjectButton.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {deleteProject();}}});
         toggleUserStatus = new Button("Toggle user status");
 
         setProjectLeadButton.setPrefWidth(150);
@@ -120,5 +120,16 @@ public class ManageProjects extends Stage {
         projectLeadLabel.setText("Project leader: " + ((currentProject == null || currentProject.getProjectLead() == null) ? "nobody" : currentProject.getProjectLead()));
         projectStartDateLabel.setText("Start date: " + ((currentProject == null || currentProject.getStartDate() == null) ? "no date set yet" : currentProject.getStartDate()));
         projectEndDateLabel.setText("End date: " + ((currentProject == null || currentProject.getEndDate() == null) ? "no date set yet" : currentProject.getEndDate()));
+    }
+    public void deleteProject() {
+        Project project = projectList.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete " + project + " ?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            PM2000.getProjects().remove(project);
+            projectList.getItems().clear();
+            projectList.getItems().addAll(PM2000.getProjects());
+        }
     }
 }
