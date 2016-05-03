@@ -20,7 +20,7 @@ public class ToggleSuperUsers extends Stage {
     protected Scene scene;
     protected AnchorPane root;
     protected VBox vbox;
-    protected Button deleteUser;
+    protected Button toggleUserButton;
     protected ListView<User> normalList, superList;
 
     public ToggleSuperUsers() {
@@ -57,14 +57,14 @@ public class ToggleSuperUsers extends Stage {
         normalList.setPrefWidth(this.getMaxWidth() / 2);
         superList.setPrefWidth(this.getMaxWidth() / 2);
 
-        deleteUser = new Button("Toggle Users");
-        deleteUser.setPrefWidth(this.getMaxWidth());
-        deleteUser.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {toggleUser();}});
-        deleteUser.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {toggleUser();}}});
+        toggleUserButton = new Button("Toggle Users");
+        toggleUserButton.setPrefWidth(this.getMaxWidth());
+        toggleUserButton.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {toggleUser();}});
+        toggleUserButton.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {toggleUser();}}});
 
         HBox hbox = new HBox();
         hbox.getChildren().addAll(normalList, superList);
-        vbox.getChildren().addAll(hbox, deleteUser);
+        vbox.getChildren().addAll(hbox, toggleUserButton);
 
         setScene(scene);
         this.show();
