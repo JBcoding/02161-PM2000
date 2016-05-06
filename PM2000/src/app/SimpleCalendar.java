@@ -42,4 +42,13 @@ public class SimpleCalendar implements Serializable {
         }
         return timeUsed;
     }
+
+    public Quarter getQuarter(Date date, int number) {
+        int daysSince = daysBetween(new Date(0, 0, 0, 0, 0, 0), date);
+        Day day = days.get(daysSince);
+        if (day == null) {
+            return null;
+        }
+        return day.quarters[number];
+    }
 }

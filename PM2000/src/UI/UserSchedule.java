@@ -35,8 +35,6 @@ public class UserSchedule extends Stage {
         root.getChildren().add(vbox);
 
         userCombobox = new ComboBox<>();
-        System.out.println(user.getProject());
-        System.out.println(user.getProject().getMembers());
         userCombobox.getItems().addAll(user.getProject().getMembers());
         userCombobox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
             @Override
@@ -52,6 +50,11 @@ public class UserSchedule extends Stage {
         outOf.setPrefHeight(userCombobox.getPrefHeight());
 
         listOfActivities = new ListView<>();
+        listOfActivities.setOnKeyPressed((KeyEvent evt)->{
+            if ((evt.getCode() == KeyCode.ESCAPE)) {
+                close();
+            }
+        });
 
         ManageActivities = new Button("Manage Activities");
         ManageActivities.setPrefWidth(this.getMaxWidth());

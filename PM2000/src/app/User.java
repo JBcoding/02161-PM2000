@@ -129,6 +129,10 @@ public class User implements Serializable {
         return userID;
     }
 
+    public SimpleCalendar getSimpleCalendar() {
+        return simpleCalendar;
+    }
+
     @Override
     public String toString() {
         return name + " (" + userID + ")";

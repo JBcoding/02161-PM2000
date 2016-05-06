@@ -5,7 +5,7 @@ import java.util.Date;
  * Created by madsbjoern on 04/04/16.
  */
 public class Day implements Serializable {
-    protected Quarter[] quarters = new Quarter[96];
+    public Quarter[] quarters = new Quarter[96];
 
     public Day() {
         for (int i = 0; i < 96; i ++) {

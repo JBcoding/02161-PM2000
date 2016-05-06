@@ -13,7 +13,7 @@ public class UserPanel extends Stage {
     protected Scene scene;
     protected AnchorPane root;
     protected VBox vbox;
-    protected Button workCalender, createActivity, manageActivities, registerAssistance, projectSummary, userSchedule;
+    protected Button workCalender, registerTime, createActivity, manageActivities, registerAssistance, projectSummary, userSchedule;
 
     public UserPanel(User thisUser) {
         this.thisUser = thisUser;
@@ -35,12 +35,18 @@ public class UserPanel extends Stage {
         vbox.getChildren().addAll(workCalender);
 
         if (thisUser.getProject() != null) {
+
+            registerTime = new Button("Register Time");
+            registerTime.setPrefWidth(this.getMaxWidth());
+            registerTime.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {registerTime();}});
+            registerTime.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {registerTime();}}});
+
             registerAssistance = new Button("Register Assistance");
             registerAssistance.setPrefWidth(this.getMaxWidth());
             registerAssistance.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {registerAssistance();}});
             registerAssistance.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {registerAssistance();}}});
 
-            vbox.getChildren().addAll(registerAssistance);
+            vbox.getChildren().addAll(registerTime, registerAssistance);
         }
         if (thisUser.getProject() != null && thisUser.getProject().getProjectLead() == thisUser) {
             createActivity = new Button("Create Activity");
@@ -76,6 +82,10 @@ public class UserPanel extends Stage {
         });
     }
 
+    private void registerTime() {
+        new RegisterTimePanel(thisUser);
+    }
+
     private void projectSummary() {
         new ProjectSummary();
     }
@@ -91,7 +101,7 @@ public class UserPanel extends Stage {
     }
 
     public void workCalender() {
-        new WorkCalender();
+        new WorkCalender(thisUser);
     }
 
     public void createActivity() {new CreateActivity(thisUser.getProject());}
