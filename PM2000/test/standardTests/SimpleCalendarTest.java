@@ -64,7 +64,7 @@ public class SimpleCalendarTest extends BeforeAndAfterTest {
     }
 
     @Test
-    public void TestGetQuarter() throws NegativeTimeException {
+    public void TestUser_SimpleCalender_GetQuarter() throws NegativeTimeException {
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
 
         Activity activity = new Activity("", new Project("name"));
@@ -77,7 +77,7 @@ public class SimpleCalendarTest extends BeforeAndAfterTest {
     }
 
     @Test
-    public void TestGetQuarterEqualsNull() throws NegativeTimeException {
+    public void TestUser_SimpleCalender_GetQuarterEqualsNull() throws NegativeTimeException {
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
 
         Activity activity = new Activity("", new Project("name"));
