@@ -48,6 +48,7 @@ public final class PM2000 {
                 UserID += namePart.charAt(0);
             }
         }
+        UserID = UserID.toUpperCase();
         if (doesUserIdExist(UserID)) {
             char extension = 'A';
             while (doesUserIdExist(UserID + extension)) {
