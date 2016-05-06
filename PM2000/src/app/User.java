@@ -66,6 +66,9 @@ public class User implements Serializable {
 
     public void setProject(Project project) {
         this.project = project;
+        if (project != null) {
+            project.addMember(this);
+        }
     }
 
     public Project getProject() {

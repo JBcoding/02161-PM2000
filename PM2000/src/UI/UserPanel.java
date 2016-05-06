@@ -87,7 +87,7 @@ public class UserPanel extends Stage {
    private void manageActivities() {new ManageActivities(thisUser.getProject());}
 
     private void userSchedule() {
-        new UserSchedule();
+        new UserSchedule(thisUser);
     }
 
     public void workCalender() {
