@@ -32,4 +32,13 @@ public class PM2000Test extends BeforeAndAfterTest {
         assertTrue(PM2000.getProjects().contains(project2));
         assertTrue(PM2000.getProjects().contains(project3));
     }
+
+    @Test
+    public void TestPM2000_load_loadCorrectly() {
+        Project project1 = new Project("name1");
+        PM2000.addProject(project1);
+        PM2000.save();
+        PM2000.load();
+        for (Project p : PM2000.getProjects()) {assertTrue(p.getProjectID().equals(project1.getProjectID()));}
+    }
 }

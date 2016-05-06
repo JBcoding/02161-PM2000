@@ -116,9 +116,7 @@ public final class PM2000 {
             out.writeObject(new PM2000State(users, projects, projectCount));
             out.close();
             fileOut.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {}
     }
 
     public static void load() {
@@ -134,9 +132,7 @@ public final class PM2000 {
                 projectCount = loaded.projectCount;
                 in.close();
                 fileIn.close();
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
+            } catch(Exception e) {}
         }
     }
 }

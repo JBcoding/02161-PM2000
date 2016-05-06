@@ -60,7 +60,6 @@ public class ProjectSummary extends Stage {
 
         ProjectCollectiveTime = new Label("Total time: ");
         ProjectCollectiveTime.setText("Total time(in quarters): " + project.getUsedTimeOnProject());
-        System.out.println(project.getUsedTimeOnProject());
 
         leftBox.getChildren().addAll(tempBoxStart, tempBoxEnd, tempBoxRemainder, ProjectCollectiveTime);
 
