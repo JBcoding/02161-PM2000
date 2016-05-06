@@ -13,7 +13,7 @@ public class UserPanel extends Stage {
     protected Scene scene;
     protected AnchorPane root;
     protected VBox vbox;
-    protected Button workCalender, createActivity, manageActivities, registerAssistance, projectSummary, userSchedule;
+    protected Button workCalender, createActivity, manageActivities, registerAssistance, infoSummary, userSchedule;
 
     public UserPanel(User thisUser) {
         this.thisUser = thisUser;
@@ -58,12 +58,12 @@ public class UserPanel extends Stage {
             userSchedule.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {userSchedule();}});
             userSchedule.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {userSchedule();}}});
 
-            projectSummary = new Button("Project Info");
-            projectSummary.setPrefWidth(this.getMaxWidth());
-            projectSummary.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {projectSummary();}});
-            projectSummary.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {projectSummary();}}});
+            infoSummary = new Button("Project Info");
+            infoSummary.setPrefWidth(this.getMaxWidth());
+            infoSummary.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {infoSummary();}});
+            infoSummary.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {infoSummary();}}});
 
-            vbox.getChildren().addAll(createActivity, manageActivities, userSchedule, projectSummary);
+            vbox.getChildren().addAll(createActivity, manageActivities, userSchedule, infoSummary);
         }
 
         setScene(scene);
@@ -76,8 +76,8 @@ public class UserPanel extends Stage {
         });
     }
 
-    private void projectSummary() {
-        new ProjectSummary();
+    private void infoSummary() {
+        new InfoSummary(thisUser.getProject());
     }
 
     private void registerAssistance() {
