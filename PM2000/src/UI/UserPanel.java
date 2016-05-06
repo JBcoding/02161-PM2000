@@ -87,7 +87,7 @@ public class UserPanel extends Stage {
     }
 
     private void projectSummary() {
-        new ProjectSummary(thisUser.getProject());
+        new InfoSummary(thisUser.getProject());
     }
 
     private void registerAssistance() {
