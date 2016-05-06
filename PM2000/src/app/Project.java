@@ -112,6 +112,6 @@ public class Project implements Serializable {
 
     @Override
     public String toString() {
-        return name + " (" + projectID + ")";
+            return name + " (" + projectID + ")";
     }
 }
