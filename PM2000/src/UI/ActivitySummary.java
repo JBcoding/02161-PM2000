@@ -73,7 +73,9 @@ public class ActivitySummary extends Stage {
         ActivityStartDateLabel = new Label("Start date: ");
         ActivityEndDateLabel = new Label("End date: ");
 
-        ActivityRemainderLabel = new Label("Estimated Remaining Time:");
+        ActivityRemainderLabel = new Label("Estimated Remaining Time: ");
+
+        ActivityCollectiveTime = new Label("Samlet tid: ");
 
         tempBoxStart.getChildren().addAll(ActivityStartDateLabel);
         tempBoxEnd.getChildren().addAll(ActivityEndDateLabel);
@@ -83,7 +85,7 @@ public class ActivitySummary extends Stage {
         ActivityEndDateLabel.setPrefWidth(280);
         ActivityRemainderLabel.setPrefWidth(280);
 
-        leftBox.getChildren().addAll(activityPicker, tempBoxStart, tempBoxEnd, tempBoxRemainder);
+        leftBox.getChildren().addAll(activityPicker, tempBoxStart, tempBoxEnd, tempBoxRemainder, ActivityCollectiveTime);
 
 
         VBox middleBox = new VBox();
@@ -93,11 +95,10 @@ public class ActivitySummary extends Stage {
 
         middleBox.getChildren().addAll(activityUsers);
 
-        ActivityCollectiveTime = new Label("Samlet tid: ");
 
         HBox hbox = new HBox();
         hbox.getChildren().addAll(leftBox, middleBox);
-        vbox.getChildren().addAll(hbox, ActivityCollectiveTime);
+        vbox.getChildren().addAll(hbox);
 
         updateLabels();
         updateLists();
@@ -125,24 +126,24 @@ public class ActivitySummary extends Stage {
         updateLabels();
         updateLists();
         if (newActivity.getStartDate() != null) {
-            ActivityStartDateLabel.setText("Start date: " + ((newActivity == null || activity.getStartDate() == null) ? "no date set yet" : (newActivity.getStartDate().getDate() + "-" + (newActivity.getStartDate().getMonth() + 1) + "-" + (newActivity.getStartDate().getYear() + 1900))));
+            ActivityStartDateLabel.setText("Start date: " + (newActivity.getStartDate().getDate() + "-" + (newActivity.getStartDate().getMonth() + 1) + "-" + (newActivity.getStartDate().getYear() + 1900)));
         } else {
             ActivityStartDateLabel.setText("Start date: ");
         }
         if (newActivity.getEndDate() != null) {
-            ActivityEndDateLabel.setText("End date: " + ((newActivity == null || newActivity.getEndDate() == null) ? "no date set yet" : (newActivity.getEndDate().getDate() + "-" + (newActivity.getEndDate().getMonth() + 1) + "-" + (activity.getEndDate().getYear() + 1900))));
+            ActivityEndDateLabel.setText("End date: " +  (newActivity.getEndDate().getDate() + "-" + (newActivity.getEndDate().getMonth() + 1) + "-" + (newActivity.getEndDate().getYear() + 1900)));
         } else {
             ActivityEndDateLabel.setText("End date: ");
         }
-        if (newActivity.getStartDate() != null || newActivity.getEndDate() != null) {
-            ActivityRemainderLabel.setText("Estimated Remaining Time:" + ((activity.getUsedTimeOnActivity()/startToNow)*nowToEnd));
+        if (newActivity.getStartDate() != null && newActivity.getEndDate() != null) {
+            ActivityRemainderLabel.setText("Estimated Remaining Time: " + ((activity.getUsedTimeOnActivity()/(startToNow + 1))*nowToEnd));
         } else {
             ActivityRemainderLabel.setText("Estimated Remaining Time: Missing Date(s)");
         }
-        if (newActivity.getStartDate() != null || newActivity.getEndDate() != null) {
-            ActivityCollectiveTime.setText("Samlet tid: " + activity.getUsedTimeOnActivity());
+        if (newActivity.getStartDate() != null && newActivity.getEndDate() != null) {
+            ActivityCollectiveTime.setText("Total time (in quarters): " + activity.getUsedTimeOnActivity() + " out of " + activity.getEstimatedTime());
         } else {
-            ActivityCollectiveTime.setText("Samlet tid: Missing Date(s)");
+            ActivityCollectiveTime.setText("Total time (in quarters): Missing Date(s)");
         }
         updateLists();
         updateLabels();
@@ -160,8 +161,8 @@ public class ActivitySummary extends Stage {
         Activity activity = activityPicker.getSelectionModel().getSelectedItem();
         ActivityStartDateLabel.setText("Start date: " + ((activity == null || activity.getStartDate() == null) ? "no date set yet" : (activity.getStartDate().getDate() + "-" + (activity.getStartDate().getMonth() + 1) + "-" + (activity.getStartDate().getYear() + 1900))));
         ActivityEndDateLabel.setText("End date: " + ((activity == null || activity.getEndDate() == null) ? "no date set yet" : (activity.getEndDate().getDate() + "-" + (activity.getEndDate().getMonth() + 1) + "-" + (activity.getEndDate().getYear() + 1900))));
-        ActivityRemainderLabel.setText("Estimated Remaining Time:" + ((activity.getUsedTimeOnActivity()/(startToNow + 1))*nowToEnd));
-        ActivityCollectiveTime.setText("Samlet tid: " + activity.getUsedTimeOnActivity());
+        ActivityRemainderLabel.setText("Estimated Remaining Time: " + ((activity.getUsedTimeOnActivity()/(startToNow + 1))*nowToEnd));
+        ActivityCollectiveTime.setText("Total time (in quarters): " + activity.getUsedTimeOnActivity() + " out of " + activity.getEstimatedTime());
     }
     public void updateLists() {
         Activity activity = activityPicker.getSelectionModel().getSelectedItem();

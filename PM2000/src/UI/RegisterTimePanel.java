@@ -140,7 +140,7 @@ public class RegisterTimePanel extends Stage {
         try {
             if (!sickNormal.getValue().equals("Activity")) {
                 Project dummy = new Project("dummy");
-                thisUser.addUsedTime(new Activity(sickNormal.getValue(), dummy), startDate, endDate, new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 59, 0));
+                thisUser.addUsedTime(new Activity(sickNormal.getValue(), 1, dummy), startDate, endDate, new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 59, 0));
                 PM2000.getProjects().remove(dummy);
             } else {
                 thisUser.addUsedTime(activity, startDate, endDate, startT, endT);

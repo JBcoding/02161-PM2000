@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class QuarterTest extends BeforeAndAfterTest {
     @Test
     public void TestQuarter_SetActivity_SetsValue() {
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         Quarter quarter = new Quarter();
 
@@ -22,8 +22,8 @@ public class QuarterTest extends BeforeAndAfterTest {
 
     @Test
     public void TestQuarter_SetActivity_OverridesValue() {
-        Activity activity1 = new Activity("", new Project("name1"));
-        Activity activity2 = new Activity("", new Project("name2"));
+        Activity activity1 = new Activity("a", 1, new Project("name1"));
+        Activity activity2 = new Activity("a", 1, new Project("name2"));
 
         Quarter quarter = new Quarter();
 

@@ -14,8 +14,9 @@ public class Activity implements Serializable {
     protected Set<User> members;
     protected Date startDate;
     protected Date endDate;
+    protected int estimatedTime;
 
-    public Activity(String name, Project project) throws NullPointerException, IllegalArgumentException {
+    public Activity(String name, int estimatedTime, Project project) throws NullPointerException, IllegalArgumentException {
         if (name == null || project == null || name.equals("")) {
             throw new NullPointerException();
         }
@@ -25,6 +26,7 @@ public class Activity implements Serializable {
         ActivityID = (new Random()).nextInt(2147483646) + 1;
         this.name = name;
         this.project = project;
+        this.estimatedTime = estimatedTime;
         this.members = new HashSet<>();
         project.addActivity(this);
     }
@@ -35,6 +37,10 @@ public class Activity implements Serializable {
 
     public Project getProject() {
         return project;
+    }
+
+    public int getEstimatedTime() {
+        return estimatedTime;
     }
 
     public int getActivityID() {

@@ -19,7 +19,7 @@ public class CreateActivity extends Stage {
     protected AnchorPane root;
     protected VBox vbox;
     protected Button createActivity;
-    protected TextField nameField;
+    protected TextField nameField, estematedTimeField;
     protected Label nameTakenLabel;
     protected Project project;
 
@@ -44,6 +44,8 @@ public class CreateActivity extends Stage {
         nameTakenLabel = new Label("");
         updateLabel();
 
+        estematedTimeField = new TextField("Estimated Time");
+
         createActivity = new Button("Create Activity");
         createActivity.setPrefWidth(this.getMaxWidth());
         createActivity.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {
@@ -51,7 +53,7 @@ public class CreateActivity extends Stage {
         createActivity.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {
             createActivity();}}});
 
-        vbox.getChildren().addAll(nameField, nameTakenLabel, createActivity);
+        vbox.getChildren().addAll(nameField, estematedTimeField, nameTakenLabel, createActivity);
 
         setScene(scene);
         this.show();
@@ -81,10 +83,19 @@ public class CreateActivity extends Stage {
             return;
         }
         try {
-            project.addActivity(new Activity(nameField.getText(), project));
+            int estematedTime = 0;
+            try {
+                estematedTime = Integer.parseInt(estematedTimeField.getText());
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Estimated time not a number", ButtonType.OK);
+                alert.showAndWait();
+                return;
+            }
+            project.addActivity(new Activity(nameField.getText(), estematedTime, project));
         } catch (NullPointerException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Name not valid", ButtonType.OK);
             alert.showAndWait();
+            return;
         }
         PM2000.save();
         close();

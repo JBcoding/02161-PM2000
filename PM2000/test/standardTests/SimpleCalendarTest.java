@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class SimpleCalendarTest extends BeforeAndAfterTest {
     @Test
     public void TestSimpleCalendar_AddUsedTime_AddsUsedTime() throws NegativeTimeException {
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         SimpleCalendar simpleCalendar = new SimpleCalendar();
 
@@ -23,8 +23,8 @@ public class SimpleCalendarTest extends BeforeAndAfterTest {
 
     @Test
     public void TestSimpleCalendar_AddUsedTime_OverridesUsedTime() throws NegativeTimeException {
-        Activity activity1 = new Activity("", new Project("name1"));
-        Activity activity2 = new Activity("", new Project("name2"));
+        Activity activity1 = new Activity("a", 1, new Project("name1"));
+        Activity activity2 = new Activity("a", 1, new Project("name2"));
 
         SimpleCalendar simpleCalendar = new SimpleCalendar();
 
@@ -35,7 +35,7 @@ public class SimpleCalendarTest extends BeforeAndAfterTest {
 
     @Test
     public void TestDay_AddUsedTime_ErrorOnNegativeTime() {
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         SimpleCalendar simpleCalendar = new SimpleCalendar();
 
@@ -50,7 +50,7 @@ public class SimpleCalendarTest extends BeforeAndAfterTest {
 
     @Test
     public void TestDay_AddUsedTime_ErrorOnNegativeDate() {
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         SimpleCalendar simpleCalendar = new SimpleCalendar();
 
@@ -67,7 +67,7 @@ public class SimpleCalendarTest extends BeforeAndAfterTest {
     public void TestUser_SimpleCalender_GetQuarter() throws NegativeTimeException {
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
 
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         Date date = new Date(2016, 4, 10);
         user.addUsedTime(activity, date, new Date(2016, 4, 11), new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 45, 0));
@@ -80,7 +80,7 @@ public class SimpleCalendarTest extends BeforeAndAfterTest {
     public void TestUser_SimpleCalender_GetQuarterEqualsNull() throws NegativeTimeException {
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
 
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         Date date = new Date(2016, 4, 10);
         Date ugyldigDate = new Date(2018, 4, 11);

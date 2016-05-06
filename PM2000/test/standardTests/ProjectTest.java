@@ -128,7 +128,7 @@ public class ProjectTest extends BeforeAndAfterTest {
     public void TestProject_AddActivity_AddsActivity() {
         Project project = new Project("Project name");
 
-        Activity activity = new Activity("", project);
+        Activity activity = new Activity("a", 1, project);
         project.addActivity(activity);
 
         assertTrue(project.getActivities().contains(activity));
@@ -138,7 +138,7 @@ public class ProjectTest extends BeforeAndAfterTest {
     public void TestProject_AddActivity_AddActivitysOnce() {
         Project project = new Project("Project name");
 
-        Activity activity = new Activity("", project);
+        Activity activity = new Activity("a", 1, project);
         project.addActivity(activity);
         project.addActivity(activity);
 
@@ -158,7 +158,7 @@ public class ProjectTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_GetUsedTimeOnActivity_GetsUsedTime() throws NegativeTimeException {
         Project project = new Project("Project name");
-        Activity activity1 = new Activity("Activity name1", project);
+        Activity activity1 = new Activity("Activity name1", 1, project);
 
         User user1 = new User("name1", "mail1", "123456781");
         User user2 = new User("name2", "mail2", "123456782");
@@ -170,7 +170,7 @@ public class ProjectTest extends BeforeAndAfterTest {
         user2.addUsedTime(activity1, new Date(2016, 4, 1), new Date(2016, 4, 20), new Date(0, 0, 0, 9, 0, 0), new Date(0, 0, 0, 16, 15, 0));
 
 
-        Activity activity2 = new Activity("Activity name2", project);
+        Activity activity2 = new Activity("Activity name2", 1, project);
 
         User user3 = new User("name3", "mail3", "123456783");
         User user4 = new User("name4", "mail4", "123456784");

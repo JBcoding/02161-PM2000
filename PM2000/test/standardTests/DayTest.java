@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class DayTest extends BeforeAndAfterTest {
     @Test
     public void TestDay_AddUsedTime_AddsUsedTime() throws NegativeTimeException {
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         Day day = new Day();
 
@@ -20,8 +20,8 @@ public class DayTest extends BeforeAndAfterTest {
 
     @Test
     public void TestDay_AddUsedTime_OverridesUsedTime() throws NegativeTimeException {
-        Activity activity1 = new Activity("", new Project("name1"));
-        Activity activity2 = new Activity("", new Project("name2"));
+        Activity activity1 = new Activity("a", 1, new Project("name1"));
+        Activity activity2 = new Activity("a", 1, new Project("name2"));
 
         Day day = new Day();
 
@@ -33,7 +33,7 @@ public class DayTest extends BeforeAndAfterTest {
 
     @Test
     public void TestDay_AddUsedTime_ErrorOnNegativeTime() {
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         Day day = new Day();
 

@@ -17,7 +17,7 @@ public class AddUserToActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputA() {
-        Activity activity = new Activity("name", new Project("name"));
+        Activity activity = new Activity("name", 1, new Project("name"));
         try {
             activity.addMember(null);
             fail("Can add null user");
@@ -26,7 +26,7 @@ public class AddUserToActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputB() {
-        Activity activity = new Activity("name", new Project("name"));
+        Activity activity = new Activity("name", 1, new Project("name"));
         try {
             activity.addMember(null);
             fail("Can add non exiting user");
@@ -35,14 +35,14 @@ public class AddUserToActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputC() {
-        Activity activity = new Activity("name", new Project("name"));
+        Activity activity = new Activity("name", 1, new Project("name"));
         activity.addMember(new User("name", "mail", "12345678"));
         assertEquals(activity.getMembers().size(), 1);
     }
 
     @Test
     public void TestInputD() {
-        Activity activity = new Activity("name", new Project("name"));
+        Activity activity = new Activity("name", 1, new Project("name"));
         User user = new User("name", "mail", "12345678");
         activity.addMember(user);
         assertFalse(activity.addMember(user));
@@ -53,10 +53,10 @@ public class AddUserToActivityTest extends BeforeAndAfterTest {
     public void TestInputE() {
         User user = new User("name", "mail", "12345678");
         for (int i = 0; i < 10; i ++) {
-            Activity activity = new Activity("name" + i, new Project("name" + i));
+            Activity activity = new Activity("name" + i, 1, new Project("name" + i));
             assertTrue(activity.addMember(user));
         }
-        Activity activity = new Activity("name11", new Project("name11"));
+        Activity activity = new Activity("name11", 1, new Project("name11"));
         assertFalse(activity.addMember(user));
         assertEquals(user.getActivities().size(), 10);
     }
@@ -66,10 +66,10 @@ public class AddUserToActivityTest extends BeforeAndAfterTest {
         User user = new User("name", "mail", "12345678");
         user.makeSuperUser();
         for (int i = 0; i < 20; i ++) {
-            Activity activity = new Activity("name" + i, new Project("name" + i));
+            Activity activity = new Activity("name" + i, 1, new Project("name" + i));
             assertTrue(activity.addMember(user));
         }
-        Activity activity = new Activity("name21", new Project("name21"));
+        Activity activity = new Activity("name21", 1, new Project("name21"));
         assertFalse(activity.addMember(user));
         assertEquals(user.getActivities().size(), 20);
     }

@@ -84,7 +84,7 @@ public class ProjectSummary extends Stage {
         activityList = new ListView<>();
         for (Activity a : project.getActivities()) {
             String cell = a.toString() + ": ";
-            cell += a.getUsedTimeOnActivity();
+            cell += a.getUsedTimeOnActivity() + " out of " + a.getEstimatedTime();
             cell += " Quarters";
             activityList.getItems().add(cell);
         }

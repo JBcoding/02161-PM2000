@@ -76,7 +76,7 @@ public class UserTest extends BeforeAndAfterTest {
     public void TestUser_AddActivity_AddsActivity() {
         Project project = new Project("name");
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
-        Activity activity = new Activity("", project);
+        Activity activity = new Activity("a", 1, project);
 
         user.addActivity(activity);
         assertTrue(user.getActivities().contains(activity));
@@ -84,7 +84,7 @@ public class UserTest extends BeforeAndAfterTest {
 
     @Test
     public void TestSimpleCalendar_AddUsedTime_AddsUsedTime() throws NegativeTimeException {
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
 
@@ -94,8 +94,8 @@ public class UserTest extends BeforeAndAfterTest {
 
     @Test
     public void TestSimpleCalendar_AddUsedTime_OverridesUsedTime() throws NegativeTimeException {
-        Activity activity1 = new Activity("", new Project("name1"));
-        Activity activity2 = new Activity("", new Project("name2"));
+        Activity activity1 = new Activity("a", 1, new Project("name1"));
+        Activity activity2 = new Activity("a", 1, new Project("name2"));
 
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
 
@@ -106,7 +106,7 @@ public class UserTest extends BeforeAndAfterTest {
 
     @Test
     public void TestDay_AddUsedTime_ErrorOnNegativeTime() {
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
 
@@ -121,7 +121,7 @@ public class UserTest extends BeforeAndAfterTest {
 
     @Test
     public void TestDay_AddUsedTime_ErrorOnNegativeDate() {
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
 
@@ -152,7 +152,7 @@ public class UserTest extends BeforeAndAfterTest {
         user.toggleSuperUserStatus();
 
         for (int i = 0; i < 15; i ++) {
-            user.addActivity(new Activity("", new Project("name" + i)));
+            user.addActivity(new Activity("a", 1, new Project("name" + i)));
         }
 
         assertFalse(user.toggleSuperUserStatus());
@@ -177,7 +177,7 @@ public class UserTest extends BeforeAndAfterTest {
     @Test
     public void TestUser_AddActivity_ContainsActivity(){
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
-        Activity activity = new Activity("", new Project("name"));
+        Activity activity = new Activity("a", 1, new Project("name"));
 
         user.addActivity(activity);
         assertTrue(user.addActivity(activity));

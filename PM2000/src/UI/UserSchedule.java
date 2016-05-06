@@ -11,6 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Date;
+
 /**
  * Created by madsbjoern on 02/05/16.
  */
@@ -21,7 +23,7 @@ public class UserSchedule extends Stage {
     protected Label outOf;
     protected ComboBox<User> userCombobox;
     protected Button ManageActivities;
-    protected ListView<Activity> listOfActivities;
+    protected ListView<String> listOfActivities;
 
     public UserSchedule(User user) {
         root = new AnchorPane();
@@ -40,7 +42,22 @@ public class UserSchedule extends Stage {
             @Override
             public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
                 listOfActivities.getItems().clear();
-                listOfActivities.getItems().addAll(newValue.getActivities());
+                for (Activity a : newValue.getActivities()) {
+                    String cell = a.toString();
+                    Date s = a.getStartDate();
+                    if (s == null) {
+                        cell += " - no start date";
+                    } else {
+                        cell += " - " + ((s.getDate() < 10) ? "0" + s.getDate() : s.getDate()) + "/" + ((s.getMonth() < 9) ? "0" + (s.getMonth() + 1) : (s.getMonth() + 1)) + "/" + (s.getYear() + 1900);
+                    }
+                    s = a.getEndDate();
+                    if (s == null) {
+                        cell += " - no end date";
+                    } else {
+                        cell += " - " + ((s.getDate() < 10) ? "0" + s.getDate() : s.getDate()) + "/" + ((s.getMonth() < 9) ? "0" + (s.getMonth() + 1) : (s.getMonth() + 1)) + "/" + (s.getYear() + 1900);
+                    }
+                    listOfActivities.getItems().add(cell);
+                }
                 outOf.setText("  (" + newValue.getActivities().size() + "/" + (newValue.isSuperUser() ? "20" : "10") + ")");
             }
         });

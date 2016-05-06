@@ -15,7 +15,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_Constructor_SetsName() {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         assertEquals(activity.getName(), "Activity name");
     }
@@ -23,9 +23,17 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_Constructor_SetsProject() {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         assertEquals(activity.getProject(), project);
+    }
+
+    @Test
+    public void TestActivity_Constructor_SetsTime() {
+        Project project = new Project("Project name");
+        Activity activity = new Activity("Activity name", 14, project);
+
+        assertEquals(activity.getEstimatedTime(), 14);
     }
 
     @Test
@@ -33,7 +41,7 @@ public class ActivityTest extends BeforeAndAfterTest {
         Project project = new Project("Project name");
 
         try {
-            Activity activity = new Activity(null, project);
+            Activity activity = new Activity(null, 1, project);
 
             fail("Activity allows null name");
         } catch (NullPointerException e) {
@@ -44,7 +52,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_Constructor_NoNullProject() {
         try {
-            Activity activity = new Activity("Activity name", null);
+            Activity activity = new Activity("Activity name", 1, null);
 
             fail("Activity allows null project");
         } catch (NullPointerException e) {
@@ -55,7 +63,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_AddMember_AddsMember() {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         User user = new User("name1", "mail1", "123456781");
         activity.addMember(user);
@@ -66,7 +74,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_AddMember_AddsMembersOnce() {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         User user = new User("name1", "mail1", "123456781");
         activity.addMember(user);
@@ -78,7 +86,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_SetStartDate_SetsStartDate() throws NegativeTimeException {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         Date startDate = new Date(2016, 4, 1, 0, 0, 0);
 
@@ -90,7 +98,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_SetEndDate_SetsEndDate() throws NegativeTimeException {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         Date endDate = new Date(2016, 4, 1, 0, 0, 0);
 
@@ -102,7 +110,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_SetStartDate_NoStartDateAfterEndDate() throws NegativeTimeException {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         Date startDate = new Date(2016, 4, 2, 0, 0, 0);
         Date endDate = new Date(2016, 4, 1, 0, 0, 0);
@@ -118,7 +126,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_SetEndDate_NoEndDateBeforeStartDate() throws NegativeTimeException {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         Date startDate = new Date(2016, 4, 2, 0, 0, 0);
         Date endDate = new Date(2016, 4, 1, 0, 0, 0);
@@ -134,7 +142,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_GetUsedTimeOnActivity_GetsUsedTime() throws NegativeTimeException {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         User user1 = new User("name1", "mail1", "123456781");
         User user2 = new User("name2", "mail2", "123456782");
@@ -151,7 +159,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     @Test
     public void TestActivity_ToString() {
         Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
+        Activity activity = new Activity("Activity name", 1, project);
 
         assertEquals(activity.toString(), "Activity name (" + activity.getActivityID() + ")");
     }

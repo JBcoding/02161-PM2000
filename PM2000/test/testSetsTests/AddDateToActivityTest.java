@@ -17,7 +17,7 @@ public class AddDateToActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputA() {
-        Activity activity = new Activity("name", new Project("name"));
+        Activity activity = new Activity("name", 1, new Project("name"));
         try {
             activity.setStartDate(null);
             fail("Can add null to start date");
@@ -35,7 +35,7 @@ public class AddDateToActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputB2() {
-        Activity activity = new Activity("name", new Project("name"));
+        Activity activity = new Activity("name", 1, new Project("name"));
         try {
             activity.setStartDate(null);
             fail("Can add null to start date");
@@ -44,7 +44,7 @@ public class AddDateToActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputB3() {
-        Activity activity = new Activity("name", new Project("name"));
+        Activity activity = new Activity("name", 1, new Project("name"));
         try {
             activity.setEndDate(null);
             fail("Can add null to end date");
@@ -53,7 +53,7 @@ public class AddDateToActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputC() throws NegativeTimeException {
-        Activity activity = new Activity("name", new Project("name"));
+        Activity activity = new Activity("name", 1, new Project("name"));
 
         Date startDate = new Date(2016, 4, 23);
         Date endDate = new Date(2016, 5, 14);
@@ -67,7 +67,7 @@ public class AddDateToActivityTest extends BeforeAndAfterTest {
 
     @Test
     public void TestInputD() throws NegativeTimeException {
-        Activity activity = new Activity("name", new Project("name"));
+        Activity activity = new Activity("name", 1, new Project("name"));
         activity.setStartDate(new Date(2016, 4, 23));
 
         try {
