@@ -16,7 +16,7 @@ public class Activity implements Serializable {
     protected Date endDate;
 
     public Activity(String name, Project project) throws NullPointerException, IllegalArgumentException {
-        if (name == null || project == null) {
+        if (name == null || project == null || name.equals("")) {
             throw new NullPointerException();
         }
         if (project.getActivityWithName(name) != null) {

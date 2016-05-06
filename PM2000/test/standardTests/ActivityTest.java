@@ -29,27 +29,6 @@ public class ActivityTest extends BeforeAndAfterTest {
     }
 
     @Test
-    public void TestActivity_Constructor_SetsActivityID1() {
-        int current = (new Activity("name", new Project("name"))).getActivityID();
-        Project project = new Project("Project name");
-        Activity activity = new Activity("Activity name", project);
-
-        assertEquals(activity.getActivityID(), current + 1);
-    }
-
-    @Test
-    public void TestActivity_Constructor_SetsActivityID2() {
-        int current = (new Activity("name", new Project("name"))).getActivityID();
-        Project project = new Project("Project name");
-        for (int i = 0; i < 20; i ++) {
-            Activity temp = new Activity("Activity name" + i, project);
-        }
-
-        Activity activity = new Activity("Activity name", project);
-        assertEquals(activity.getActivityID(), current + 21);
-    }
-
-    @Test
     public void TestActivity_Constructor_NoNullName() {
         Project project = new Project("Project name");
 

@@ -75,7 +75,12 @@ public class CreateProject extends Stage {
             alert.showAndWait();
             return;
         }
-        new Project(nameField.getText());
+        try {
+            new Project(nameField.getText());
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.showAndWait();
+        }
         close();
     }
 

@@ -80,7 +80,12 @@ public class CreateActivity extends Stage {
             alert.showAndWait();
             return;
         }
-        project.addActivity(new Activity(nameField.getText(), project));
+        try {
+            project.addActivity(new Activity(nameField.getText(), project));
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Name not valid", ButtonType.OK);
+            alert.showAndWait();
+        }
         PM2000.save();
         close();
     }
