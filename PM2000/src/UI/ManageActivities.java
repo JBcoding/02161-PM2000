@@ -40,7 +40,7 @@ public class ManageActivities extends Stage {
         this.setMaxHeight(600);
         this.setMinWidth(1000);
         this.setMinHeight(600);
-        setTitle("Manage Project");
+        setTitle("Manage Activities");
         vbox = new VBox();
         root.getChildren().add(vbox);
 

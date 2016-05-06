@@ -19,7 +19,7 @@ public class SimpleCalendar implements Serializable {
         }
         int startDay = daysBetween(new Date(0, 0, 0, 0, 0, 0), startDate);
         int endDay = daysBetween(new Date(0, 0, 0, 0, 0, 0), endDate);
-        for (Integer i = startDay; i <= endDay; i ++) {
+        for (Integer i = startDay; i < endDay; i ++) {
             Day day = days.get(i);
             if (day == null) {
                 day = new Day();
@@ -41,5 +41,14 @@ public class SimpleCalendar implements Serializable {
             timeUsed += e.getValue().getUsedTimeOnActivity(activity);
         }
         return timeUsed;
+    }
+
+    public Quarter getQuarter(Date date, int number) {
+        int daysSince = daysBetween(new Date(0, 0, 0, 0, 0, 0), date);
+        Day day = days.get(daysSince);
+        if (day == null) {
+            return null;
+        }
+        return day.quarters[number];
     }
 }

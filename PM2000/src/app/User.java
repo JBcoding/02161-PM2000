@@ -66,6 +66,9 @@ public class User implements Serializable {
 
     public void setProject(Project project) {
         this.project = project;
+        if (project != null) {
+            project.addMember(this);
+        }
     }
 
     public Project getProject() {
@@ -124,6 +127,10 @@ public class User implements Serializable {
 
     public String getID() {
         return userID;
+    }
+
+    public SimpleCalendar getSimpleCalendar() {
+        return simpleCalendar;
     }
 
     @Override

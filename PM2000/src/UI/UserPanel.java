@@ -13,7 +13,7 @@ public class UserPanel extends Stage {
     protected Scene scene;
     protected AnchorPane root;
     protected VBox vbox;
-    protected Button workCalender, createActivity, manageActivities, registerAssistance, infoSummary, userSchedule;
+    protected Button workCalender, registerTime, createActivity, manageActivities, registerAssistance, projectSummary, userSchedule;
 
     public UserPanel(User thisUser) {
         this.thisUser = thisUser;
@@ -35,12 +35,18 @@ public class UserPanel extends Stage {
         vbox.getChildren().addAll(workCalender);
 
         if (thisUser.getProject() != null) {
+
+            registerTime = new Button("Register Time");
+            registerTime.setPrefWidth(this.getMaxWidth());
+            registerTime.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {registerTime();}});
+            registerTime.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {registerTime();}}});
+
             registerAssistance = new Button("Register Assistance");
             registerAssistance.setPrefWidth(this.getMaxWidth());
             registerAssistance.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {registerAssistance();}});
             registerAssistance.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {registerAssistance();}}});
 
-            vbox.getChildren().addAll(registerAssistance);
+            vbox.getChildren().addAll(registerTime, registerAssistance);
         }
         if (thisUser.getProject() != null && thisUser.getProject().getProjectLead() == thisUser) {
             createActivity = new Button("Create Activity");
@@ -58,12 +64,12 @@ public class UserPanel extends Stage {
             userSchedule.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {userSchedule();}});
             userSchedule.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {userSchedule();}}});
 
-            infoSummary = new Button("Project Info");
-            infoSummary.setPrefWidth(this.getMaxWidth());
-            infoSummary.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {infoSummary();}});
-            infoSummary.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {infoSummary();}}});
+            projectSummary = new Button("Project Info");
+            projectSummary.setPrefWidth(this.getMaxWidth());
+            projectSummary.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {projectSummary();}});
+            projectSummary.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {projectSummary();}}});
 
-            vbox.getChildren().addAll(createActivity, manageActivities, userSchedule, infoSummary);
+            vbox.getChildren().addAll(createActivity, manageActivities, userSchedule, projectSummary);
         }
 
         setScene(scene);
@@ -76,8 +82,12 @@ public class UserPanel extends Stage {
         });
     }
 
-    private void infoSummary() {
-        new InfoSummary(thisUser.getProject());
+    private void registerTime() {
+        new RegisterTimePanel(thisUser);
+    }
+
+    private void projectSummary() {
+        new ProjectSummary();
     }
 
     private void registerAssistance() {
@@ -87,11 +97,11 @@ public class UserPanel extends Stage {
    private void manageActivities() {new ManageActivities(thisUser.getProject());}
 
     private void userSchedule() {
-        new UserSchedule();
+        new UserSchedule(thisUser);
     }
 
     public void workCalender() {
-        new WorkCalender();
+        new WorkCalender(thisUser);
     }
 
     public void createActivity() {new CreateActivity(thisUser.getProject());}
