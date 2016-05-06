@@ -75,4 +75,18 @@ public class SimpleCalendarTest extends BeforeAndAfterTest {
 
         assertEquals(user.getSimpleCalendar().getQuarter(date, 20).getActivity().getActivityID(), activity.getActivityID());
     }
+
+    @Test
+    public void TestGetQuarterEqualsNull() throws NegativeTimeException {
+        User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
+
+        Activity activity = new Activity("", new Project("name"));
+
+        Date date = new Date(2016, 4, 10);
+        Date ugyldigDate = new Date(2018, 4, 11);
+        user.addUsedTime(activity, date, new Date(2016, 4, 11), new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 45, 0));
+
+
+        assertEquals(user.getSimpleCalendar().getQuarter(ugyldigDate, 20), null);
+    }
 }

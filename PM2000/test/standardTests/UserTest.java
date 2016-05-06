@@ -173,4 +173,9 @@ public class UserTest extends BeforeAndAfterTest {
 
         assertEquals(user.toString(),"Mads Madsen (" + user.getID()+ ")" );
     }
+
+    @Test
+    public void TestAddActivityContainsActivity(){
+
+    }
 }
