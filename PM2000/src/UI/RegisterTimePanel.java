@@ -123,7 +123,7 @@ public class RegisterTimePanel extends Stage {
 
     private void save() {
         Activity activity = activityComboBox.getSelectionModel().getSelectedItem();
-        if (activity == null) {
+        if (activity == null && sickNormal.getValue().equals("Activity")) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "No activity selected", ButtonType.OK);
             alert.showAndWait();
             return;
@@ -134,7 +134,11 @@ public class RegisterTimePanel extends Stage {
         Date startT = new Date(0, 0, 0, Integer.parseInt(startTime.getValue().split(":")[0]), Integer.parseInt(startTime.getValue().split(":")[1]), 0);
         Date endT = new Date(0, 0, 0, Integer.parseInt(endTime.getValue().split(":")[0]), Integer.parseInt(endTime.getValue().split(":")[1]), 0);
         try {
-            thisUser.addUsedTime(activity, startDate, endDate, startT, endT);
+            if (!sickNormal.getValue().equals("Activity")) {
+                thisUser.addUsedTime(new Activity(sickNormal.getValue(), new Project("dummy")), startDate, endDate, startT, endT);
+            } else {
+                thisUser.addUsedTime(activity, startDate, endDate, startT, endT);
+            }
             close();
             PM2000.save();
         } catch (NegativeTimeException e) {

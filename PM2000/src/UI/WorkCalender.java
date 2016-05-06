@@ -71,10 +71,20 @@ public class WorkCalender extends Stage {
         AnchorPane anchorPane = new AnchorPane();
         Date date = Date.from(Instant.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault())));
         for (int i = 0; i < 96; i ++) {
+            String mL = "" + ((i * 15) % 60);
+            String mH = "" + (i * 15 + 15) % 60;
+            String hL = "" + (i / 4);
+            String hH = "" + ((i + 1) / 4);
+            if (mL.length() == 1) {mL = "0" + mL;}
+            if (mH.length() == 1) {mH = "0" + mH;}
+            if (hL.length() == 1) {hL = "0" + hL;}
+            if (hH.length() == 1) {hH = "0" + hH;}
+            String textLow = hL + ":" + mL;
+            String textHigh = hH + ":" + mH;
             Quarter quarter = thisUser.getSimpleCalendar().getQuarter(date, i);
-            Label info = new Label(" Hey");
+            Label info = new Label(" " + textLow + " - " + textHigh);
             if (quarter != null && quarter.getActivity() != null) {
-                info.setText(quarter.getActivity().toString());
+                info.setText(info.getText() + "  " + quarter.getActivity().toString());
                 info.setStyle("-fx-background-color: blue;");
             }
             info.setMinWidth(350);
