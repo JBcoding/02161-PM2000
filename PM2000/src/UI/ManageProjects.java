@@ -183,6 +183,15 @@ public class ManageProjects extends Stage {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
+            for (User u : project.getMembers()) {
+                u.setProject(null);
+            }
+            for (Activity a : project.getActivities()) {
+                for (User u : a.getMembers()) {
+                    u.getActivities().remove(a);
+                }
+                a.getMembers().clear();
+            }
             PM2000.getProjects().remove(project);
             PM2000.save();
             projectList.getItems().clear();

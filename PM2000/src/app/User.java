@@ -73,6 +73,9 @@ public class User implements Serializable {
     }
 
     public boolean addActivity(Activity activity) {
+        if (activities.contains(activity)) {
+            return true;
+        }
         if (activities.size() == (superUser ? 20 : 10)) {
             return false;
         }
