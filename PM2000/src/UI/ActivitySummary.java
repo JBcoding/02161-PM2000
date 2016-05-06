@@ -50,9 +50,6 @@ public class ActivitySummary extends Stage {
         }
         activity = activityPicker.getSelectionModel().getSelectedItem();
 
-
-        activityPicker = new ComboBox<>();
-        activityPicker.getItems().addAll(project.getActivities());
         activityPicker.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if ((ke.getCode() == KeyCode.ESCAPE)) {close();}}});
         if (activityPicker.getItems().size() > 0) {
             activityPicker.getSelectionModel().clearAndSelect(0);
@@ -92,8 +89,7 @@ public class ActivitySummary extends Stage {
         VBox middleBox = new VBox();
         activityUsers = new ListView<>();
         activityUsers.getItems().addAll(activity.getMembers());
-        //String userList = activity.getMembers().toString();
-
+        activityUsers.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if ((ke.getCode() == KeyCode.ESCAPE)) {close();}}});
 
         middleBox.getChildren().addAll(activityUsers);
 
