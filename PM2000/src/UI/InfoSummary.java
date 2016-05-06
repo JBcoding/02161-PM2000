@@ -20,13 +20,17 @@ public class InfoSummary extends Stage {
         this.project = project;
         this.thisUser = thisUser;
         root = new AnchorPane();
-        scene = new Scene(root, 240, 500);
+        scene = new Scene(root, 240, 300);
         this.setMaxWidth(240);
-        this.setMaxHeight(500);
+        this.setMaxHeight(300);
         this.setMinWidth(240);
-        this.setMinHeight(500);
+        this.setMinHeight(300);
         setTitle("Info Summary");
         vbox = new VBox();
+        vbox.setSpacing(30.0);
+        vbox.setPrefWidth(200);
+        root.setLeftAnchor(vbox, 20.0);
+        root.setTopAnchor(vbox, 70.0);
         root.getChildren().add(vbox);
 
         projectSummary = new Button("Project Time");

@@ -35,6 +35,7 @@ public class ManageProjects extends Stage {
     public ManageProjects() {
         root = new AnchorPane();
         scene = new Scene(root, 1000, 600);
+        scene.getStylesheets().add("styleWork.css");
         this.setMaxWidth(1000);
         this.setMaxHeight(600);
         this.setMinWidth(1000);
@@ -62,6 +63,10 @@ public class ManageProjects extends Stage {
         projectLeadLabel = new Label("Project leader: ");
         projectStartDateLabel = new Label("Start date: ");
         projectEndDateLabel = new Label("End date: ");
+
+        projectLeadLabel.setStyle("-fx-text-fill: white;");
+        projectStartDateLabel.setStyle("-fx-text-fill: white;");
+        projectEndDateLabel.setStyle("-fx-text-fill: white;");
 
         projectLeadLabel.setPrefWidth(280);
         projectStartDateLabel.setPrefWidth(280);
@@ -142,7 +147,7 @@ public class ManageProjects extends Stage {
         hbox.getChildren().addAll(projectList, rightBox);
         vbox.getChildren().addAll(hbox);
 
-        scene.getStylesheets().add("style.css");
+
         setScene(scene);
         this.show();
 

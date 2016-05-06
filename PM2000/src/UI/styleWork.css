@@ -12,3 +12,10 @@
 .label{
     -fx-text-fill: black;
 }
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
+    -fx-text-fill: white;
+}
+.list-cell { -background-color: black;}
+.list-cell:odd { -fx-background-color: #636363; -fx-text-fill: white;}
+.list-cell:even { -fx-background-color: #636363; -fx-text-fill: white;}
