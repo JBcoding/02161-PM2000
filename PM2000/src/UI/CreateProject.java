@@ -31,6 +31,8 @@ public class CreateProject extends Stage {
         this.setMinHeight(300);
         setTitle("Create Project");
         vbox = new VBox();
+        vbox.setSpacing(20.0);
+        root.setTopAnchor(vbox, 50.0);
         root.getChildren().add(vbox);
 
         nameField = new TextField("Name");
@@ -54,6 +56,7 @@ public class CreateProject extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     private void updateLabel() {

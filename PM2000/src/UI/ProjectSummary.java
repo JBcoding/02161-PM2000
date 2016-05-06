@@ -103,6 +103,7 @@ public class ProjectSummary extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     private int daysBetween(Date d1, Date d2){

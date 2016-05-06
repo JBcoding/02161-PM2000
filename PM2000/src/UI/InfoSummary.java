@@ -48,6 +48,7 @@ public class InfoSummary extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     private void projectSummary() {

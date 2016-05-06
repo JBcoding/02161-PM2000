@@ -86,6 +86,7 @@ public class LoginScreen extends Application {
                 stage.close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     private void login() {

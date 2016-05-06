@@ -69,6 +69,9 @@ public class WorkCalender extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("styleWork.css");
+
+
         updateCalendar();
     }
 

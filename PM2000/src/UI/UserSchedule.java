@@ -74,6 +74,8 @@ public class UserSchedule extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
+
         userCombobox.getSelectionModel().select(0);
     }
 }

@@ -25,6 +25,10 @@ public class UserPanel extends Stage {
         this.setMinHeight(500);
         setTitle("User Panel");
         vbox = new VBox();
+        vbox.setSpacing(30.0);
+        vbox.setPrefWidth(200);
+        root.setLeftAnchor(vbox, 20.0);
+        root.setTopAnchor(vbox, 60.0);
         root.getChildren().add(vbox);
 
         workCalender = new Button("Manage Work Calender");
@@ -80,6 +84,7 @@ public class UserPanel extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     private void registerTime() {

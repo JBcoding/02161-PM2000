@@ -62,6 +62,7 @@ public class ToggleSuperUsers extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     public void toggleUser() {

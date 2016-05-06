@@ -142,6 +142,7 @@ public class ManageProjects extends Stage {
         hbox.getChildren().addAll(projectList, rightBox);
         vbox.getChildren().addAll(hbox);
 
+        scene.getStylesheets().add("style.css");
         setScene(scene);
         this.show();
 

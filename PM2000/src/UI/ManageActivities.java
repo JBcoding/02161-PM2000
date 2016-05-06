@@ -142,6 +142,8 @@ public class ManageActivities extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
+
         Activity activity = activityList.getSelectionModel().getSelectedItem();
         selectedActivityChanged(activity);
     }

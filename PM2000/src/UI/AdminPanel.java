@@ -1,11 +1,14 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,19 +23,27 @@ public class AdminPanel extends Stage {
 
     public AdminPanel() {
         root = new AnchorPane();
-        scene = new Scene(root, 240, 500);
+        scene = new Scene(root, 240, 450);
         this.setMaxWidth(240);
-        this.setMaxHeight(500);
+        this.setMaxHeight(450);
         this.setMinWidth(240);
-        this.setMinHeight(500);
+        this.setMinHeight(450);
         setTitle("Admin panel");
         vbox = new VBox();
-        root.getChildren().add(vbox);
+        vbox.setSpacing(30.0);
+        vbox.setPrefWidth(200);
+        root.getChildren().addAll(vbox);
+        root.setLeftAnchor(vbox, 20.0);
+        root.setTopAnchor(vbox, 70.0);
+
+
 
         createUser = new Button("Create User");
         createUser.setPrefWidth(this.getMaxWidth());
         createUser.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {createUser();}});
         createUser.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {createUser();}}});
+        createUser.setMinWidth(vbox.getPrefWidth());
+        createUser.setMinWidth(vbox.getPrefWidth());
 
         deleteUser = new Button("Delete User");
         deleteUser.setPrefWidth(this.getMaxWidth());
@@ -54,6 +65,8 @@ public class AdminPanel extends Stage {
         manageProjects.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {manageProjects();}});
         manageProjects.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {manageProjects();}}});
 
+
+
         vbox.getChildren().addAll(createUser, deleteUser, toggleSuperUsers, createProject, manageProjects);
 
         setScene(scene);
@@ -64,6 +77,7 @@ public class AdminPanel extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     private void manageProjects() {

@@ -33,6 +33,8 @@ public class CreateActivity extends Stage {
         this.setMinHeight(300);
         setTitle("Create Activity");
         vbox = new VBox();
+        vbox.setSpacing(20.0);
+        root.setTopAnchor(vbox, 50.0);
         root.getChildren().add(vbox);
 
         nameField = new TextField("Name");
@@ -59,6 +61,7 @@ public class CreateActivity extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     private void updateLabel() {

@@ -110,6 +110,8 @@ public class ActivitySummary extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
+
         updateLabels();
         updateLists();
     }

@@ -38,6 +38,7 @@ public class DeleteUser extends Stage {
         deleteUser.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {deleteUser();}});
         deleteUser.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {deleteUser();}}});
 
+        listView.getStyleClass().add("list-view");
         vbox.getChildren().addAll(listView, deleteUser);
 
         setScene(scene);
@@ -48,6 +49,7 @@ public class DeleteUser extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     public void deleteUser() {

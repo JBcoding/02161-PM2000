@@ -122,6 +122,7 @@ public class RegisterTimePanel extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     private void save() {

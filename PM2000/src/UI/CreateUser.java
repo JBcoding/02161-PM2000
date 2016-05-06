@@ -23,11 +23,11 @@ public class CreateUser extends Stage {
 
     public CreateUser() {
         root = new AnchorPane();
-        scene = new Scene(root, 240, 300);
+        scene = new Scene(root, 240, 350);
         this.setMaxWidth(240);
-        this.setMaxHeight(300);
+        this.setMaxHeight(350);
         this.setMinWidth(240);
-        this.setMinHeight(300);
+        this.setMinHeight(350);
         setTitle("Create User");
         vbox = new VBox();
         root.getChildren().add(vbox);
@@ -37,6 +37,8 @@ public class CreateUser extends Stage {
         mailField = new TextField("Mail");
         telField = new TextField("Phone Number");
         userID = new Label("");
+        vbox.setSpacing(30.0);
+        root.setTopAnchor(vbox, 30.0);
         updateLabel();
 
         createUser = new Button("Create User");
@@ -54,6 +56,7 @@ public class CreateUser extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("style.css");
     }
 
     private void updateLabel() {
