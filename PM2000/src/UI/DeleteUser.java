@@ -52,10 +52,24 @@ public class DeleteUser extends Stage {
 
     public void deleteUser() {
         User user = listView.getSelectionModel().getSelectedItem();
+        if (user == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "No user selected", ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete " + user + " ?", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
+            if (user.getProject() != null) {
+                if (user.getProject().getProjectLead() == user) {
+                    user.getProject().setProjectLead(null);
+                }
+                user.getProject().getMembers().remove(user);
+            }
+            for (Activity a : user.getActivities()) {
+                a.getMembers().remove(user);
+            }
             PM2000.getUsers().remove(user);
             PM2000.save();
             close();
