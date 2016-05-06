@@ -260,10 +260,14 @@ public class ManageProjects extends Stage {
         if (user != null) {
             if (user.getProject() == project) {
                 user.setProject(null);
+                if (project.getProjectLead() == user) {
+                    project.setProjectLead(null);
+                }
             } else {
                 user.setProject(project);
             }
             updateLists();
+            updateLabels();
             PM2000.save();
         } else {
             // no user selected
