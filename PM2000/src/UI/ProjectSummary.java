@@ -24,11 +24,11 @@ public class ProjectSummary extends Stage {
     public ProjectSummary(Project project) {
         this.project = project;
         root = new AnchorPane();
-        scene = new Scene(root, 1000, 600);
-        this.setMaxWidth(1000);
-        this.setMaxHeight(600);
-        this.setMinWidth(1000);
-        this.setMinHeight(600);
+        scene = new Scene(root, 850, 450);
+        this.setMaxWidth(850);
+        this.setMaxHeight(450);
+        this.setMinWidth(850);
+        this.setMinHeight(450);
         setTitle("Project Info");
         vbox = new VBox();
         root.getChildren().add(vbox);

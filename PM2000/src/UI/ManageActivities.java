@@ -63,6 +63,9 @@ public class ManageActivities extends Stage {
         activityStartDateLabel = new Label("Start date: ");
         activityEndDateLabel = new Label("End date: ");
 
+        activityStartDateLabel.setStyle("-fx-text-fill: white;");
+        activityEndDateLabel.setStyle("-fx-text-fill: white;");
+
         activityStartDateLabel.setPrefWidth(280);
         activityEndDateLabel.setPrefWidth(280);
 
@@ -142,7 +145,7 @@ public class ManageActivities extends Stage {
                 close();
             }
         });
-        scene.getStylesheets().add("style.css");
+        scene.getStylesheets().add("styleWork.css");
 
         Activity activity = activityList.getSelectionModel().getSelectedItem();
         selectedActivityChanged(activity);

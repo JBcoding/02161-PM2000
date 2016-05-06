@@ -19,4 +19,4 @@
 .list-cell { -background-color: black;}
 .list-cell:odd { -fx-background-color: #636363; -fx-text-fill: white;}
 .list-cell:even { -fx-background-color: #636363; -fx-text-fill: white;}
-}
+

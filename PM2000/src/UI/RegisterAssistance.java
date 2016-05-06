@@ -109,6 +109,7 @@ public class RegisterAssistance extends Stage {
                 close();
             }
         });
+        scene.getStylesheets().add("styleWork.css");
     }
 
     private void save() {

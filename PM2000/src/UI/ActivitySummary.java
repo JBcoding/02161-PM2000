@@ -30,11 +30,11 @@ public class ActivitySummary extends Stage {
     public ActivitySummary(Project project) {
         this.project = project;
         root = new AnchorPane();
-        scene = new Scene(root, 1000, 600);
-        this.setMaxWidth(1000);
-        this.setMaxHeight(600);
-        this.setMinWidth(1000);
-        this.setMinHeight(600);
+        scene = new Scene(root, 500, 550);
+        this.setMaxWidth(550);
+        this.setMaxHeight(450);
+        this.setMinWidth(550);
+        this.setMinHeight(450);
         setTitle("Activity Info");
         vbox = new VBox();
         root.getChildren().add(vbox);
