@@ -169,10 +169,14 @@ public class ManageProjects extends Stage {
         if (newProject.getStartDate() != null) {
             Date s = newProject.getStartDate();
             startDatePicker.setValue(LocalDate.parse(((s.getDate() < 10) ? "0" + s.getDate() : s.getDate()) + "/" + ((s.getMonth() < 9) ? "0" + (s.getMonth() + 1) : (s.getMonth() + 1)) + "/" + (s.getYear() + 1900), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } else {
+            startDatePicker.setValue(LocalDate.parse("01/01/2016", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         }
         if (newProject.getEndDate() != null) {
             Date s = newProject.getEndDate();
             endDatePicker.setValue(LocalDate.parse(((s.getDate() < 10) ? "0" + s.getDate() : s.getDate()) + "/" + ((s.getMonth() < 9) ? "0" + (s.getMonth() + 1) : (s.getMonth() + 1)) + "/" + (s.getYear() + 1900), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } else {
+            endDatePicker.setValue(LocalDate.parse("01/01/2016", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         }
     }
 

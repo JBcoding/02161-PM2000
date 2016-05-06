@@ -158,10 +158,14 @@ public class ManageActivities extends Stage {
         if (newActivity.getStartDate() != null) {
             Date s = newActivity.getStartDate();
             startDatePicker.setValue(LocalDate.parse(((s.getDate() < 10) ? "0" + s.getDate() : s.getDate()) + "/" + ((s.getMonth() < 9) ? "0" + (s.getMonth() + 1) : (s.getMonth() + 1)) + "/" + (s.getYear() + 1900), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } else {
+            startDatePicker.setValue(LocalDate.parse("01/01/2016", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         }
         if (newActivity.getEndDate() != null) {
             Date s = newActivity.getEndDate();
             endDatePicker.setValue(LocalDate.parse(((s.getDate() < 10) ? "0" + s.getDate() : s.getDate()) + "/" + ((s.getMonth() < 9) ? "0" + (s.getMonth() + 1) : (s.getMonth() + 1)) + "/" + (s.getYear() + 1900), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } else {
+            endDatePicker.setValue(LocalDate.parse("01/01/2016", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         }
     }
 
