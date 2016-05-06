@@ -103,6 +103,8 @@ public class LoginScreen extends Application {
             }
             if (thisUser != null) {
                 // log in as this guy(or girl)
+                new UserPanel(thisUser);
+                stage.close();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "User does not exist", ButtonType.OK);
                 alert.showAndWait();
