@@ -1,13 +1,13 @@
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 /**
  * Created by madsbjoern on 04/04/16.
  */
 public class Activity implements Serializable {
-    protected static int IDCount;
     protected String name;
     protected Project project;
     protected int ActivityID;
@@ -22,8 +22,7 @@ public class Activity implements Serializable {
         if (project.getActivityWithName(name) != null) {
             throw new IllegalArgumentException();
         }
-        IDCount ++;
-        ActivityID = IDCount;
+        ActivityID = (new Random()).nextInt(2147483646) + 1;
         this.name = name;
         this.project = project;
         this.members = new HashSet<>();
