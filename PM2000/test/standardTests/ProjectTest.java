@@ -188,7 +188,7 @@ public class ProjectTest extends BeforeAndAfterTest {
     }
 
     @Test
-    public void TestStringToString(){
+    public void TestProject_NameToString(){
         Project project = new Project("Testname");
 
         assertEquals(project.toString(), "Testname (201601)");

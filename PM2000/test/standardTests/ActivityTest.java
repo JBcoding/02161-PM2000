@@ -170,7 +170,7 @@ public class ActivityTest extends BeforeAndAfterTest {
     }
 
     @Test
-    public void TestToString() {
+    public void TestActivity_ToString() {
         Project project = new Project("Project name");
         Activity activity = new Activity("Activity name", project);
 

@@ -168,14 +168,18 @@ public class UserTest extends BeforeAndAfterTest {
     }
 
     @Test
-    public void TestToString() {
+    public void TestUser_ToString() {
         User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
 
         assertEquals(user.toString(),"Mads Madsen (" + user.getID()+ ")" );
     }
 
     @Test
-    public void TestAddActivityContainsActivity(){
+    public void TestUser_AddActivity_ContainsActivity(){
+        User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
+        Activity activity = new Activity("", new Project("name"));
 
+        user.addActivity(activity);
+        assertTrue(user.addActivity(activity));
     }
 }
