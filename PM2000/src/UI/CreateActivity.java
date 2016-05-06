@@ -78,6 +78,7 @@ public class CreateActivity extends Stage {
             return;
         }
         project.addActivity(new Activity(nameField.getText(), project));
+        PM2000.save();
         close();
     }
 

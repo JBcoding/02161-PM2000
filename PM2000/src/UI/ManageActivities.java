@@ -147,6 +147,12 @@ public class ManageActivities extends Stage {
     }
 
     private void selectedActivityChanged(Activity newActivity) {
+        if (newActivity == null) {
+            if (activityList.getItems().size() > 0) {
+                activityList.getSelectionModel().select(0);
+            }
+            return;
+        }
         updateLabels();
         updateLists();
         if (newActivity.getStartDate() != null) {
@@ -282,8 +288,8 @@ public class ManageActivities extends Stage {
         Activity activity = activityList.getSelectionModel().getSelectedItem();
         userInActivity.getItems().clear();
         userNotInActivity.getItems().clear();
-        userInActivity.getItems().addAll((PM2000.getUsers().stream().filter(p -> p.getActivities().contains(activity))).collect(Collectors.toList()));
-        userNotInActivity.getItems().addAll((PM2000.getUsers().stream().filter(p -> !p.getActivities().contains(activity))).collect(Collectors.toList()));
+        userInActivity.getItems().addAll((PM2000.getUsers().stream().filter(p -> p.getProject() == project && p.getActivities().contains(activity))).collect(Collectors.toList()));
+        userNotInActivity.getItems().addAll((PM2000.getUsers().stream().filter(p -> p.getProject() == project && !p.getActivities().contains(activity))).collect(Collectors.toList()));
     }
 }
 

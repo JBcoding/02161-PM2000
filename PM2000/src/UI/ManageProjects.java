@@ -155,6 +155,12 @@ public class ManageProjects extends Stage {
     }
 
     private void selectedProjectChanged(Project newProject) {
+        if (newProject == null) {
+            if (projectList.getItems().size() > 0) {
+                projectList.getSelectionModel().select(0);
+            }
+            return;
+        }
         updateLabels();
         updateLists();
         if (newProject.getProjectLead() != null) {

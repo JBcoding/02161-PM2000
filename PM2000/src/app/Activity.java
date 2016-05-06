@@ -102,4 +102,9 @@ public class Activity implements Serializable {
         }
         return timeUsed;
     }
+
+    @Override
+    public String toString() {
+        return name + " (" + ActivityID + ")";
+    }
 }
