@@ -14,8 +14,8 @@ public class Day implements Serializable {
     }
 
     public void addUsedTime(Activity activity, Date startTime, Date endTime) throws NegativeTimeException {
-        int startQuater = startTime.getHours() * 4 + (int)Math.floor(startTime.getMinutes() / 15);
-        int endQuater = endTime.getHours() * 4 + (int)Math.ceil(endTime.getMinutes() / 15);
+        int startQuater = startTime.getHours() * 4 + (int)Math.floor(startTime.getMinutes() / 15.0);
+        int endQuater = endTime.getHours() * 4 + (int)Math.ceil(endTime.getMinutes() / 15.0);
         if (startQuater > endQuater) {
             throw new NegativeTimeException("You cannot add negative time");
         }

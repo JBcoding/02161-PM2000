@@ -93,6 +93,9 @@ public class RegisterTimePanel extends Stage {
             if (hH.length() == 1) {hH = "0" + hH;}
             String textLow = hL + ":" + mL;
             String textHigh = hH + ":" + mH;
+            if (textHigh.equals("24:00")) {
+                textHigh = "23:59";
+            }
             startTime.getItems().add(textLow);
             endTime.getItems().add(textHigh);
         }
@@ -135,7 +138,9 @@ public class RegisterTimePanel extends Stage {
         Date endT = new Date(0, 0, 0, Integer.parseInt(endTime.getValue().split(":")[0]), Integer.parseInt(endTime.getValue().split(":")[1]), 0);
         try {
             if (!sickNormal.getValue().equals("Activity")) {
-                thisUser.addUsedTime(new Activity(sickNormal.getValue(), new Project("dummy")), startDate, endDate, startT, endT);
+                Project dummy = new Project("dummy");
+                thisUser.addUsedTime(new Activity(sickNormal.getValue(), dummy), startDate, endDate, new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 59, 0));
+                PM2000.getProjects().remove(dummy);
             } else {
                 thisUser.addUsedTime(activity, startDate, endDate, startT, endT);
             }

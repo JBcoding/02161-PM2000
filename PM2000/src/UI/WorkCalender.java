@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,7 +28,6 @@ public class WorkCalender extends Stage {
     protected AnchorPane root;
     protected VBox vbox;
     protected DatePicker datePicker;
-    protected Button registerTime;
     protected ScrollPane calendar;
     protected User thisUser;
 
@@ -52,9 +52,14 @@ public class WorkCalender extends Stage {
         datePicker.setShowWeekNumbers(true);
         datePicker.setEditable(false);
         datePicker.setValue(LocalDate.now());
+        datePicker.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                updateCalendar();
+            }
+        });
 
-
-        vbox.getChildren().addAll(calendar);
+        vbox.getChildren().addAll(datePicker, calendar);
 
         setScene(scene);
         this.show();
@@ -85,7 +90,10 @@ public class WorkCalender extends Stage {
             Label info = new Label(" " + textLow + " - " + textHigh);
             if (quarter != null && quarter.getActivity() != null) {
                 info.setText(info.getText() + "  " + quarter.getActivity().toString());
-                info.setStyle("-fx-background-color: blue;");
+                int hash = quarter.getActivity().toString().hashCode();
+                info.setStyle("-fx-background-color: rgb(" + (190 + hash % 40) + ", " + (190 + (hash * 7) % 40) + ", " + (190 + (hash * 27) % 40) + ");");
+                info.setPrefHeight(20.0);
+                info.setPrefWidth(430);
             }
             info.setMinWidth(350);
             info.setFont(Font.font("Monospaced", info.getFont().getSize()));
