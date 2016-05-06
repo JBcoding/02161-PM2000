@@ -60,7 +60,7 @@ public class ActivitySummary extends Stage {
         activityPicker.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Activity>() {
             @Override
             public void changed(ObservableValue<? extends Activity> observable, Activity oldValue, Activity newValue) {
-                //selectedProjectChanged(newValue);
+                selectedActivityChanged(newValue);
             }
         });
 
@@ -136,16 +136,18 @@ public class ActivitySummary extends Stage {
         } else {
             ActivityEndDateLabel.setText("End date: ");
         }
-        if (newActivity.getEndDate() != null) {
-            ActivityEndDateLabel.setText("End date: " + ((newActivity == null || newActivity.getEndDate() == null) ? "no date set yet" : (newActivity.getEndDate().getDate() + "-" + (newActivity.getEndDate().getMonth() + 1) + "-" + (activity.getEndDate().getYear() + 1900))));
+        if (newActivity.getStartDate() != null || newActivity.getEndDate() != null) {
+            ActivityRemainderLabel.setText("Estimated Remaining Time:" + ((activity.getUsedTimeOnActivity()/startToNow)*nowToEnd));
         } else {
-            ActivityEndDateLabel.setText("End date: ");
+            ActivityRemainderLabel.setText("Estimated Remaining Time: Missing Date(s)");
         }
-        if (newActivity.getEndDate() != null) {
-            ActivityEndDateLabel.setText("End date: " + ((newActivity == null || newActivity.getEndDate() == null) ? "no date set yet" : (newActivity.getEndDate().getDate() + "-" + (newActivity.getEndDate().getMonth() + 1) + "-" + (activity.getEndDate().getYear() + 1900))));
+        if (newActivity.getStartDate() != null || newActivity.getEndDate() != null) {
+            ActivityCollectiveTime.setText("Samlet tid: " + activity.getUsedTimeOnActivity());
         } else {
-            ActivityEndDateLabel.setText("End date: ");
+            ActivityCollectiveTime.setText("Samlet tid: Missing Date(s)");
         }
+        updateLists();
+        updateLabels();
     }
     private int daysBetween(Date d1, Date d2){return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
