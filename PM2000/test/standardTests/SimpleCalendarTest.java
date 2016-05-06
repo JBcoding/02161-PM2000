@@ -1,3 +1,4 @@
+import com.sun.tracing.dtrace.ArgsAttributes;
 import org.junit.Test;
 
 /**
@@ -60,5 +61,18 @@ public class SimpleCalendarTest extends BeforeAndAfterTest {
         } catch (NegativeTimeException e) {
             assertEquals(e.getMessage(), "You cannot add negative dates");
         }
+    }
+
+    @Test
+    public void TestGetQuarter() throws NegativeTimeException {
+        User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
+
+        Activity activity = new Activity("", new Project("name"));
+
+        Date date = new Date(2016, 4, 10);
+        user.addUsedTime(activity, date, new Date(2016, 4, 11), new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 45, 0));
+
+
+        assertEquals(user.getSimpleCalendar().getQuarter(date, 20).getActivity().getActivityID(), activity.getActivityID());
     }
 }

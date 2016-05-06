@@ -166,4 +166,11 @@ public class UserTest extends BeforeAndAfterTest {
         User user2 = new User("Mikkel Tåstrup Holger, ", "Eksempel@mail", "43345312");
         assertEquals(user2.getID(), "MTHB");
     }
+
+    @Test
+    public void TestToString() {
+        User user = new User("Mads Madsen", "Mads@mail.net", "+45 12345678");
+
+        assertEquals(user.toString(),"Mads Madsen (" + user.getID()+ ")" );
+    }
 }

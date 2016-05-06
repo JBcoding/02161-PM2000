@@ -169,4 +169,11 @@ public class ActivityTest extends BeforeAndAfterTest {
         assertEquals(activity.getUsedTimeOnActivity(), 1260); // 1260 quaters
     }
 
+    @Test
+    public void TestToString() {
+        Project project = new Project("Project name");
+        Activity activity = new Activity("Activity name", project);
+
+        assertEquals(activity.toString(), "Activity name (" + activity.getActivityID() + ")");
+    }
 }
