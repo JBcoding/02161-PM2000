@@ -13,7 +13,7 @@ public class UserPanel extends Stage {
     protected Scene scene;
     protected AnchorPane root;
     protected VBox vbox;
-    protected Button workCalender, createActivity, manageActivity, registerAssistance, projectSummary, userSchedule;
+    protected Button workCalender, createActivity, manageActivities, registerAssistance, projectSummary, userSchedule;
 
     public UserPanel(User thisUser) {
         this.thisUser = thisUser;
@@ -48,10 +48,10 @@ public class UserPanel extends Stage {
             createActivity.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {createActivity();}});
             createActivity.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {createActivity();}}});
 
-            manageActivity = new Button("Manage Activity");
-            manageActivity.setPrefWidth(this.getMaxWidth());
-            manageActivity.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {createActivity();}});
-            manageActivity.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {createActivity();}}});
+            manageActivities = new Button("Manage Activities");
+            manageActivities.setPrefWidth(this.getMaxWidth());
+            manageActivities.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {manageActivities();}});
+            manageActivities.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {manageActivities();}}});
 
             userSchedule = new Button("User Schedules");
             userSchedule.setPrefWidth(this.getMaxWidth());
@@ -63,7 +63,7 @@ public class UserPanel extends Stage {
             projectSummary.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent event) {projectSummary();}});
             projectSummary.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {projectSummary();}}});
 
-            vbox.getChildren().addAll(createActivity, manageActivity, userSchedule, projectSummary);
+            vbox.getChildren().addAll(createActivity, manageActivities, userSchedule, projectSummary);
         }
 
         setScene(scene);
@@ -84,9 +84,7 @@ public class UserPanel extends Stage {
         new RegisterAssistance();
     }
 
-   //private void manageActivity() {
-   //     new ManageActivity();
-   // }
+   private void manageActivities() {new ManageActivities(thisUser.getProject());}
 
     private void userSchedule() {
         new UserSchedule();
