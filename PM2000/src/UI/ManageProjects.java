@@ -12,7 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -50,8 +52,7 @@ public class ManageProjects extends Stage {
         projectList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Project>() {
             @Override
             public void changed(ObservableValue<? extends Project> observable, Project oldValue, Project newValue) {
-                updateLabels();
-                updateLists();
+                selectedProjectChanged(newValue);
             }
         });
 
@@ -70,10 +71,12 @@ public class ManageProjects extends Stage {
         endDatePicker = new DatePicker();
         endDatePicker.setPrefWidth(225);
         endDatePicker.setShowWeekNumbers(true);
+        endDatePicker.setEditable(false);
 
         startDatePicker = new DatePicker();
         startDatePicker.setPrefWidth(225);
         startDatePicker.setShowWeekNumbers(true);
+        startDatePicker.setEditable(false);
 
         projectLeadPicker = new ComboBox<>();
         projectLeadPicker.getItems().addAll(PM2000.getUsers());
@@ -108,21 +111,10 @@ public class ManageProjects extends Stage {
 
         userInProject = new ListView<>();
         userInProject.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {removeUserFromProject();} else if ((ke.getCode() == KeyCode.ESCAPE)) {close();}}});
-        userInProject.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
-            @Override
-            public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-                userNotInProject.getSelectionModel().clearSelection();
-            }
-        });
 
         userNotInProject = new ListView<>();
         userNotInProject.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {addUserToProject();} else if ((ke.getCode() == KeyCode.ESCAPE)) {close();}}});
-        userNotInProject.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
-            @Override
-            public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-                userInProject.getSelectionModel().clearSelection();
-            }
-        });
+
         userInProject.setPrefWidth(333);
         userNotInProject.setPrefWidth(333);
 
@@ -158,6 +150,24 @@ public class ManageProjects extends Stage {
                 close();
             }
         });
+        Project project = projectList.getSelectionModel().getSelectedItem();
+        selectedProjectChanged(project);
+    }
+
+    private void selectedProjectChanged(Project newProject) {
+        updateLabels();
+        updateLists();
+        if (newProject.getProjectLead() != null) {
+            projectLeadPicker.getSelectionModel().select(newProject.getProjectLead());
+        }
+        if (newProject.getStartDate() != null) {
+            Date s = newProject.getStartDate();
+            startDatePicker.setValue(LocalDate.parse(((s.getDate() < 10) ? "0" + s.getDate() : s.getDate()) + "/" + ((s.getMonth() < 9) ? "0" + (s.getMonth() + 1) : (s.getMonth() + 1)) + "/" + (s.getYear() + 1900), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        }
+        if (newProject.getEndDate() != null) {
+            Date s = newProject.getEndDate();
+            endDatePicker.setValue(LocalDate.parse(((s.getDate() < 10) ? "0" + s.getDate() : s.getDate()) + "/" + ((s.getMonth() < 9) ? "0" + (s.getMonth() + 1) : (s.getMonth() + 1)) + "/" + (s.getYear() + 1900), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        }
     }
 
     private void updateLabels() {
@@ -174,43 +184,49 @@ public class ManageProjects extends Stage {
 
         if (alert.getResult() == ButtonType.YES) {
             PM2000.getProjects().remove(project);
+            PM2000.save();
             projectList.getItems().clear();
             projectList.getItems().addAll(PM2000.getProjects());
         }
     }
+
     public void setSetProjectLead() {
         User user = projectLeadPicker.getSelectionModel().getSelectedItem();
         Project project = projectList.getSelectionModel().getSelectedItem();
         project.setProjectLead(user);
+        PM2000.save();
         updateLabels();
     }
+
     public void setStartDate() {
-        if (startDatePicker.getValue() == null){
+        if (startDatePicker.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "No date selected", ButtonType.OK);
             alert.showAndWait();
             return;
         }
         Date date = Date.from(Instant.from(startDatePicker.getValue().atStartOfDay(ZoneId.systemDefault())));
         Project project = projectList.getSelectionModel().getSelectedItem();
-        if(project.setStartDate(date)){
+        if (project.setStartDate(date)) {
             updateLabels();
-        }else{
+            PM2000.save();
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Start date invalid", ButtonType.OK);
             alert.showAndWait();
         }
     }
 
     public void setEndDate() {
-        if (endDatePicker.getValue() == null){
+        if (endDatePicker.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "No date selected", ButtonType.OK);
             alert.showAndWait();
             return;
         }
         Date date = Date.from(Instant.from(endDatePicker.getValue().atStartOfDay(ZoneId.systemDefault())));
         Project project = projectList.getSelectionModel().getSelectedItem();
-        if(project.setEndDate(date)){
+        if (project.setEndDate(date)) {
             updateLabels();
-        }else{
+            PM2000.save();
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "End date invalid", ButtonType.OK);
             alert.showAndWait();
         }
@@ -238,10 +254,10 @@ public class ManageProjects extends Stage {
    }
 
     public void removeUserFromProject() {
-        User user = userNotInProject.getSelectionModel().getSelectedItem();
+        User user = userInProject.getSelectionModel().getSelectedItem();
         Project project = projectList.getSelectionModel().getSelectedItem();
         if (user == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "User can not be made to a normal user", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "User cannot be removed", ButtonType.OK);
             alert.showAndWait();
         } else {
             user.setProject(null);
@@ -258,7 +274,7 @@ public class ManageProjects extends Stage {
         User user = userNotInProject.getSelectionModel().getSelectedItem();
         Project project = projectList.getSelectionModel().getSelectedItem();
         if (user == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "User can not be made to a normal user", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "User cannot be added", ButtonType.OK);
             alert.showAndWait();
         } else {
             user.setProject(project);

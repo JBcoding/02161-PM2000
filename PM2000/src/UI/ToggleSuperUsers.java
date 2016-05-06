@@ -36,21 +36,9 @@ public class ToggleSuperUsers extends Stage {
 
         normalList = new ListView<>();
         normalList.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {makeSuperUser();} else if ((ke.getCode() == KeyCode.ESCAPE)) {close();}}});
-        normalList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
-            @Override
-            public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-                superList.getSelectionModel().clearSelection();
-            }
-        });
 
         superList = new ListView<>();
         superList.setOnKeyPressed(new EventHandler<KeyEvent>() {@Override public void handle(KeyEvent ke) {if (ke.getCode().equals(KeyCode.ENTER)) {makeNormalUser();} else if ((ke.getCode() == KeyCode.ESCAPE)) {close();}}});
-        superList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
-            @Override
-            public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-                normalList.getSelectionModel().clearSelection();
-            }
-        });
 
         updateLists();
 
@@ -111,6 +99,7 @@ public class ToggleSuperUsers extends Stage {
         superList.getItems().clear();
         normalList.getItems().addAll((PM2000.getUsers().stream().filter(p -> !p.isSuperUser())).collect(Collectors.toList()));
         superList.getItems().addAll((PM2000.getUsers().stream().filter(p -> p.isSuperUser())).collect(Collectors.toList()));
+        PM2000.save();
     }
 
 }

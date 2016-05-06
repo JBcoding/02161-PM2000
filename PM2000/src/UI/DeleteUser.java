@@ -57,6 +57,7 @@ public class DeleteUser extends Stage {
 
         if (alert.getResult() == ButtonType.YES) {
             PM2000.getUsers().remove(user);
+            PM2000.save();
             close();
         }
     }

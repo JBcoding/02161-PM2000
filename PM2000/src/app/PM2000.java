@@ -108,18 +108,11 @@ public final class PM2000 {
     public static void save() {
         String workingDirectory = getFolderPath();
         (new File(workingDirectory + "/PM2000")).mkdir();
-        File fileProjects = new File(workingDirectory + "/PM2000/project.txt");
-        File fileUsers = new File(workingDirectory + "/PM2000/users.txt");
+        File file = new File(workingDirectory + "/PM2000/PM2000.txt");
         try {
-            FileOutputStream fileOut = new FileOutputStream(fileProjects.getAbsoluteFile());
+            FileOutputStream fileOut = new FileOutputStream(file.getAbsoluteFile());
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(PM2000.getProjects());
-            out.close();
-            fileOut.close();
-
-            fileOut = new FileOutputStream(fileUsers.getAbsoluteFile());
-            out = new ObjectOutputStream(fileOut);
-            out.writeObject(PM2000.getUsers());
+            out.writeObject(new PM2000State(users, projects, projectCount));
             out.close();
             fileOut.close();
         } catch (Exception e) {
@@ -129,20 +122,15 @@ public final class PM2000 {
 
     public static void load() {
         String workingDirectory = getFolderPath();
-        File fileProjects = new File(workingDirectory + "/PM2000/project.txt");
-        File fileUsers = new File(workingDirectory + "/PM2000/users.txt");
-        if (fileProjects.exists()) {
+        File file = new File(workingDirectory + "/PM2000/PM2000.txt");
+        if (file.exists()) {
             try {
-                FileInputStream fileIn = new FileInputStream(fileProjects.getAbsoluteFile());
+                FileInputStream fileIn = new FileInputStream(file.getAbsoluteFile());
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                projects = (Set<Project>)in.readObject();
-                projectCount = projects.size();
-                in.close();
-                fileIn.close();
-
-                fileIn = new FileInputStream(fileUsers.getAbsoluteFile());
-                in = new ObjectInputStream(fileIn);
-                users = (Set<User>)in.readObject();
+                PM2000State loaded = (PM2000State)in.readObject();
+                projects = loaded.projects;
+                users = loaded.users;
+                projectCount = loaded.projectCount;
                 in.close();
                 fileIn.close();
             } catch(Exception e) {
