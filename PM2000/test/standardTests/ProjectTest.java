@@ -186,4 +186,11 @@ public class ProjectTest extends BeforeAndAfterTest {
 
         assertEquals(project.getUsedTimeOnProject(), 2520); // 2520 quaters
     }
+
+    @Test
+    public void TestStringToString(){
+        Project project = new Project("Testname");
+
+        assertEquals(project.toString(), "Testname (201601)");
+    }
 }
