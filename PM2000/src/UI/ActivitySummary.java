@@ -12,8 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
@@ -62,7 +60,7 @@ public class ActivitySummary extends Stage {
         activityPicker.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Activity>() {
             @Override
             public void changed(ObservableValue<? extends Activity> observable, Activity oldValue, Activity newValue) {
-                selectedProjectChanged(newValue);
+                //selectedProjectChanged(newValue);
             }
         });
 
