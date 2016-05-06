@@ -145,13 +145,20 @@ public class ActivitySummary extends Stage {
         updateLists();
         updateLabels();
     }
-    private int daysBetween(Date d1, Date d2){return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    private int daysBetween(Date d1, Date d2){
+        if (d1 == null) {
+            d1 = new Date();
+        }
+        if (d2 == null) {
+            d2 = new Date();
+        }
+        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
     private void updateLabels() {
         Activity activity = activityPicker.getSelectionModel().getSelectedItem();
         ActivityStartDateLabel.setText("Start date: " + ((activity == null || activity.getStartDate() == null) ? "no date set yet" : (activity.getStartDate().getDate() + "-" + (activity.getStartDate().getMonth() + 1) + "-" + (activity.getStartDate().getYear() + 1900))));
         ActivityEndDateLabel.setText("End date: " + ((activity == null || activity.getEndDate() == null) ? "no date set yet" : (activity.getEndDate().getDate() + "-" + (activity.getEndDate().getMonth() + 1) + "-" + (activity.getEndDate().getYear() + 1900))));
-        ActivityRemainderLabel.setText("Estimated Remaining Time:" + ((activity.getUsedTimeOnActivity()/startToNow)*nowToEnd));
+        ActivityRemainderLabel.setText("Estimated Remaining Time:" + ((activity.getUsedTimeOnActivity()/(startToNow + 1))*nowToEnd));
         ActivityCollectiveTime.setText("Samlet tid: " + activity.getUsedTimeOnActivity());
     }
     public void updateLists() {

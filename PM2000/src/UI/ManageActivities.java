@@ -239,9 +239,7 @@ public class ManageActivities extends Stage {
                 user.getActivities().remove(activity);
                 activity.getMembers().remove(user);
             } else {
-                if (user.addActivity(activity)) {
-                    activity.addMember(user);
-                } else {
+                if (!activity.addMember(user)) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "User have reached the activity limit", ButtonType.OK);
                     alert.showAndWait();
                 }
@@ -277,9 +275,7 @@ public class ManageActivities extends Stage {
             Alert alert = new Alert(Alert.AlertType.ERROR, "No user selected", ButtonType.OK);
             alert.showAndWait();
         } else {
-            if (user.addActivity(activity)) {
-                activity.addMember(user);
-            } else {
+            if (!activity.addMember(user)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "User have reached the activity limit", ButtonType.OK);
                 alert.showAndWait();
             }
