@@ -93,7 +93,7 @@ public class Activity implements Serializable {
             this.endDate = endDate;
             return;
         }
-        throw new NegativeTimeException("End set after start date");
+        throw new NegativeTimeException("End set before start date");
     }
 
     public Date getEndDate() {
